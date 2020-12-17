@@ -1,0 +1,31 @@
+.action{
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  text-align: center;
+  width: 29px;
+  min-width: 29px;
+  color: #fff;
+  border-radius: 50%;
+  height: 29px;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 1px -3px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #3f51b5;
+  transition: 0.4s;
+  opacity: 0.8;
+  &--green{
+    background-color: #32c671;
+  }
+  &--disabled{
+    opacity: 1;
+    cursor: default;
+    background-color: #cccccc;
+  }
+  &--red{
+    background-color: red;
+  }
+  &:hover{
+    opacity: 1;
+  }
+}

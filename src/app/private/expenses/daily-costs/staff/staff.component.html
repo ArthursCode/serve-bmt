@@ -1,0 +1,152 @@
+<div class="row">
+  <form class="expenses-setup col-12" [formGroup]="staffForm">
+    <div class="expenses-setup__header pb-2 mb-2">
+      <div>Staff and benefits</div>
+      <div class="expenses-setup__buttons">
+        <div class="mr-2">
+          <button class="bmt-btn" type="button" (click)="getCosts()">Reset</button>
+        </div>
+        <div>
+          <button class="bmt-btn" (click)="saveChanges('all')" type="submit">Save all</button>
+        </div>
+      </div>
+    </div>
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Employee salaries
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="salaries">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerSalary" formControlName="payment_date" (dateChange)="changeDate('salaries')" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerSalary"></mat-datepicker-toggle>
+              <mat-datepicker #pickerSalary></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="staffForm.controls['salaries'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{staffForm.controls['salaries'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('salaries')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Payroll taxes
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="taxes">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerTaxes" (dateChange)="changeDate('taxes')" formControlName="payment_date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerTaxes"></mat-datepicker-toggle>
+              <mat-datepicker #pickerTaxes></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="staffForm.controls['taxes'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{staffForm.controls['taxes'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('taxes')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Employee Benefits and Pensions
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="benefits">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerBenefits" (dateChange)="changeDate('benefits')" formControlName="payment_date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerBenefits"></mat-datepicker-toggle>
+              <mat-datepicker #pickerBenefits></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="staffForm.controls['benefits'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{staffForm.controls['benefits'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('benefits')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Insurances
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="insurances">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerInsurances" (dateChange)="changeDate('insurances')" formControlName="payment_date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerInsurances"></mat-datepicker-toggle>
+              <mat-datepicker #pickerInsurances></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="staffForm.controls['insurances'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{staffForm.controls['insurances'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('insurances')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</div>

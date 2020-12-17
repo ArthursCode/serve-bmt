@@ -1,0 +1,68 @@
+.landing-btn{
+  text-transform: uppercase;
+  background-color: #fce043;
+  background-image: linear-gradient(315deg, #fce043 0%, #fb7ba2 74%);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 20px;
+  opacity: 0.8;
+  &:hover{
+    opacity: 1;
+  }
+  &:focus{
+    outline: none;
+    opacity: 1;
+  }
+  &:disabled{
+    background-color: #cccccc;
+    color: #ffffff;
+    cursor: default;
+    background-image: none;
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+}
+.bmt-btn{
+  white-space: nowrap;
+  text-transform: uppercase;
+  background-color: #3f51b5;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  border: none;
+  color: white;
+  padding: 7px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 20px;
+  opacity: 0.8;
+  &--red{
+    background-color: #f44336;
+  }
+  &:hover{
+    opacity: 1;
+  }
+  &:focus{
+    outline: none;
+    opacity: 1;
+  }
+  &:disabled{
+    background-color: #cccccc;
+    color: #ffffff;
+    cursor: default;
+    background-image: none;
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+}

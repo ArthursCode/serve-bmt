@@ -1,0 +1,94 @@
+<div class="page-main col">
+  <div class="card col-lg-6 col-md-6 col-sm-12">
+    <div class="card-body">
+      <div class="e-profile">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <ngx-dropzone class="custom-dropzone" [multiple]="false" [accept]="'image/*'" (change)="onSelect($event)">
+              <ngx-dropzone-label>
+                <div class="custom-dropzone__placeholder">
+                  Add company logo
+                </div>
+              </ngx-dropzone-label>
+              <ngx-dropzone-image-preview
+                ngProjectAs="ngx-dropzone-preview"
+                class="custom-dropzone__img"
+                *ngFor="let f of files"
+                [file]="f"
+                [removable]="true"
+                (removed)="onRemove(f)">
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </div>
+          <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+            <div class="text-center text-sm-left mb-2 mb-sm-0">
+              <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{settingsForm.get('name').value}}</h4>
+              <p class="mb-0">{{settingsForm.get('company').value}}</p>
+              <div class="mt-2 user-email" *ngIf="user?.email">
+                  <i class="fa fa-fw fa-envelope"></i>
+                  <span>{{user?.email}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="nav nav-tabs">
+          <li class="nav-item"><a class="active nav-link">Settings</a></li>
+        </ul>
+        <div class="tab-content pt-3">
+          <div class="tab-pane active">
+            <form class="form settings-form" novalidate="" [formGroup]="settingsForm">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Full Name</label>
+                        <input class="form-control" formControlName="name" type="text" placeholder="John Smith">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Company name</label>
+                        <input class="form-control" type="text" formControlName="company" placeholder="Company">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-6 mb-3">
+                  <div class="mb-2"><b>Change Password</b></div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>New Password</label>
+                        <input class="form-control" type="password" formControlName="password" placeholder='{{"ENTER_PASSWORD" | translate}}'>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                        <input class="form-control" formControlName="repeatPassword" type="password" placeholder='{{"ENTER_PASSWORD" | translate}}'>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-end">
+                <div class="mr-2">
+                  <button class="bmt-btn" (click)="getUserSettings()" type="submit">Reset</button>
+                </div>
+                <div>
+                  <button class="bmt-btn" (click)="openSaveSettingDialog()" type="submit">Save Changes</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

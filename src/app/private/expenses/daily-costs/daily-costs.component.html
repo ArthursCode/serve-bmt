@@ -1,0 +1,28 @@
+<div class="business-expenses">
+  <div class="row-custom">
+    <div class="col-lg-3 col-sm-12 mb-4">
+      <div class="vertical-menu shadow-card">
+        <ul>
+          <li>
+            <a [routerLink]="'staff'" routerLinkActive="active"> Staff and benefits </a>
+          </li>
+          <li>
+            <a [routerLink]="'operating-costs'" routerLinkActive="active"> Operating costs </a>
+          </li>
+          <li>
+            <a [routerLink]="'administrative-costs'" routerLinkActive="active"> Administrative costs </a>
+          </li>
+          <li>
+            <a [routerLink]="'other'" routerLinkActive="active"> Other costs </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-9 col-sm-12">
+      <div class="shadow-card">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+</div>

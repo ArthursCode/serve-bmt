@@ -1,0 +1,152 @@
+<div class="row">
+  <form class="expenses-setup col-12" [formGroup]="operatingForm">
+    <div class="expenses-setup__header pb-2 mb-2">
+      <div>Operating costs</div>
+      <div class="expenses-setup__buttons">
+        <div class="mr-2">
+          <button class="bmt-btn" type="button" (click)="getCosts()">Reset</button>
+        </div>
+        <div>
+          <button class="bmt-btn" (click)="saveChanges('all')" type="submit">Save all</button>
+        </div>
+      </div>
+    </div>
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Utilities and phone
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="utilities">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerUtilities" formControlName="payment_date" (dateChange)="changeDate('utilities')" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerUtilities"></mat-datepicker-toggle>
+              <mat-datepicker #pickerUtilities></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="operatingForm.controls['utilities'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{operatingForm.controls['utilities'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('utilities')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Building rent and expenses
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="building">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerBuilding" (dateChange)="changeDate('building')" formControlName="payment_date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerBuilding"></mat-datepicker-toggle>
+              <mat-datepicker #pickerBuilding></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="operatingForm.controls['building'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{operatingForm.controls['building'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('building')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Equipment lease
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="equipment_leases">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerEquipmentLeases" (dateChange)="changeDate('equipment_leases')" formControlName="payment_date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerEquipmentLeases"></mat-datepicker-toggle>
+              <mat-datepicker #pickerEquipmentLeases></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="operatingForm.controls['equipment_leases'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{operatingForm.controls['equipment_leases'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('equipment_leases')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <mat-accordion class="cost-accordion">
+      <mat-expansion-panel class="mb-3" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="expenses-setup__item w-100">
+              <div class="expenses-setup__title">
+                Equipment expenses
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="expenses-setup__edit" formGroupName="equipment_expenses">
+          <div class="expenses-setup__inputs">
+            <mat-form-field appearance="fill" class="cost-datepicker">
+              <mat-label>Payed date</mat-label>
+              <input matInput [matDatepicker]="pickerEquipmentExpenses" (dateChange)="changeDate('equipment_expenses')" formControlName="payment_date" readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerEquipmentExpenses"></mat-datepicker-toggle>
+              <mat-datepicker #pickerEquipmentExpenses></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="cost-sum">
+              <mat-label>Sum</mat-label>
+              <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+            </mat-form-field>
+            <div class="daily-info" *ngIf="operatingForm.controls['equipment_expenses'].get('daily_info')?.value">
+              <strong><i class="fa fa-info-circle"></i></strong> {{operatingForm.controls['equipment_expenses'].get('daily_info').value}}.
+            </div>
+          </div>
+          <div class="action action--green" (click)="saveChanges('equipment_expenses')">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</div>

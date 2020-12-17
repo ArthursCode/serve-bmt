@@ -1,0 +1,39 @@
+@import 'src/assets/scss/imports/variables';
+.sign-in{
+  color:$dark-grey;
+  &__main{
+    margin: auto;
+    max-width: 300px;
+    padding: 20px;
+    display: grid;
+    font-size: 14px;
+    .forgot-password{
+      text-align: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: .1s;
+      opacity: 0.7;
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+  &__forgot{
+    margin: auto;
+    max-width: 300px;
+    padding: 20px;
+    font-size: 14px;
+    .back-sign-in{
+      opacity: 0.7;
+      display: inline-block;
+      cursor: pointer;
+      transition: .1s;
+      i{
+        margin-right: 5px;
+      }
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.settings-form{
+  .form-group{
+    label{
+      font-size: 14px;
+    }
+  }
+}
+
+.custom-dropzone{
+  width: 180px;
+  display: inline-flex;
+  border-radius: 50% !important;
+  ngx-dropzone-image-preview > img {
+    border-radius: 50% !important;
+    object-fit: cover;
+    width: 140px;
+    height: 140px;
+  }
+
+  &__img{
+    margin: 10px auto !important;
+    outline: none;
+  }
+  &__placeholder{
+    padding: 15px;
+    opacity: 0.8;
+    transition: .1s;
+    &:hover{
+      opacity: 1;
+    }
+  }
+}
+
+.user-email{
+  i{
+    margin-right: 5px;
+    color: #9b9ca9;
+  }
+}

@@ -1,0 +1,35 @@
+.bmt-pagination{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  &__content{
+    display: flex;
+    margin: 10px auto;
+    flex-direction: row;
+    align-items: center;
+    color:#757575;
+    .disabled{
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+  &__prev, &__next{
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  &__current{
+    margin-right: 15px;
+  }
+  &__pages-info{
+    font-size: 14px;
+  }
+  &__total{
+    margin: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color:#757575;
+    span{
+      padding-right: 10px;
+    }
+  }
+}

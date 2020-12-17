@@ -1,0 +1,73 @@
+<main>
+  <section class="section section-shaped section-lg">
+    <div class="shape shape-style-1 bg-gradient-default">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="container pt-lg-md">
+      <div class="row justify-content-center">
+        <div class="col-lg-5">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-white">
+              <div class="text-muted text-center">
+                <small>Sign up</small>
+              </div>
+            </div>
+            <div class="card-body px-lg-5 py-lg-5">
+              <form role="form" [formGroup]="signUpForm">
+                <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-check-bold"></i></span>
+                    </div>
+                    <input class="form-control" id="name" formControlName="name" placeholder="name" type="text" (focus)="focus=true" (blur)="focus=false">
+                  </div>
+                </div>
+                <div class="form-group mb-3" [ngClass]="{'focused':focus1===true}">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-check-bold"></i></span>
+                    </div>
+                    <input class="form-control" id="company" formControlName="company" placeholder="company name" type="text" (focus)="focus1=true" (blur)="focus1=false">
+                  </div>
+                </div>
+                <div class="form-group mb-3" [ngClass]="{'focused':focus2===true}">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" id="email" formControlName="email" placeholder="email" type="email" (focus)="focus2=true" (blur)="focus2=false">
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'focused':focus3===true}">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="password" type="password" id="password" formControlName="password" (focus)="focus3=true" (blur)="focus3=false">
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button [disabled]="!signUpForm.valid" (click)="signUp()" type="button" class="btn btn-primary mt-4 w-100">Sign up</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12 text-center">
+              <a href="/sign-in" class="text-light">
+                <small>Already have an account, sign in?</small>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

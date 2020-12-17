@@ -1,0 +1,54 @@
+<app-navbar [hidden]="isUserLoggedIn()"></app-navbar>
+<router-outlet *ngIf="!isUserLoggedIn()" (activate)="onActivate()"></router-outlet>
+<app-footer [hidden]="isUserLoggedIn()"></app-footer>
+
+<div class="example-container" *ngIf="isUserLoggedIn()">
+  <mat-toolbar class="example-toolbar">
+    <mat-icon (click)="isExpanded = !isExpanded">menu</mat-icon>
+    <span class="example-fill-remaining-space"></span>
+    <mat-icon>settings</mat-icon>
+  </mat-toolbar>
+
+  <mat-sidenav-container  class="example-sidenav-container" autosize>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+      <mat-nav-list class="dashboard">
+        <a mat-list-item routerLink="settings" (click)="toggleActive($event)">
+          <mat-icon mat-list-icon >account_circle</mat-icon>
+          <p matLine *ngIf="isExpanded">Name</p>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <a mat-list-item routerLink="dashboard" (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>dashboard</mat-icon>
+          <p matLine *ngIf="isExpanded">Dashboard</p>
+        </a>
+        <a mat-list-item routerLink="expenses" (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>star</mat-icon>
+          <p matLine *ngIf="isExpanded">Expenses</p>
+        </a>
+        <a mat-list-item routerLink="employees" (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>people</mat-icon>
+          <p matLine *ngIf="isExpanded">Employees</p>
+        </a>
+        <a mat-list-item routerLink="departments" (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>work</mat-icon>
+          <p matLine *ngIf="isExpanded">Departments</p>
+        </a>
+        <a mat-list-item routerLink="subscription" (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>attach_money</mat-icon>
+          <p matLine *ngIf="isExpanded">Subscription</p>
+        </a>
+        <a mat-list-item (click)="logOut()">
+          <mat-icon mat-list-icon>logout</mat-icon>
+          <p matLine *ngIf="isExpanded">Log out</p>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div class="example-sidenav-content">
+      <router-outlet (activate)="onActivate()"></router-outlet>
+    </div>
+
+  </mat-sidenav-container>
+</div>

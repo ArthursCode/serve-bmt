@@ -1,0 +1,34 @@
+.bmt-table{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  .mat-elevation-z8{
+    margin: 0 auto;
+    overflow-x: auto;
+    max-width: 1200px;
+  }
+  .table-filters{
+    &__select{
+      .ng-select{
+        margin-right: -2px;
+        .ng-select-container{
+          border: 1px solid #ccc;
+          border-radius: 20px 0 0 20px;
+          box-shadow: none;
+        }
+      }
+    }
+    &__actions{
+      text-align: right;
+    }
+    &__input{
+      border: 1px solid #ccc;
+      border-radius: 0 20px 20px 0;
+      border-left: none;
+      height: 36px;
+      outline: none;
+      padding: 0 10px;
+    }
+  }
+
+}

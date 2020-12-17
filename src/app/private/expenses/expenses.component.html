@@ -1,0 +1,18 @@
+<div class="page-main">
+  <div class="sub-menu">
+    <ul>
+      <li>
+        <a [routerLink]="'daily-costs'" routerLinkActive="active"> Add Costs </a>
+      </li>
+      <li>
+        <a [routerLink]="'actions'" routerLinkActive="active"> All Costs </a>
+      </li>
+      <li>
+        <a [routerLink]="'bin'" routerLinkActive="active"> Deleted Costs </a>
+      </li>
+    </ul>
+  </div>
+  <div class="page-main__sub">
+    <router-outlet></router-outlet>
+  </div>
+</div>

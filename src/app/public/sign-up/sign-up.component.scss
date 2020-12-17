@@ -1,0 +1,10 @@
+@import 'src/assets/scss/imports/variables';
+.sign-up{
+  color: $dark-grey;
+  max-width: 300px;
+  margin: auto;
+  &__main{
+    font-size: 14px;
+    padding: 20px;
+  }
+}

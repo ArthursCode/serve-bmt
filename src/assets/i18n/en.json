@@ -1,0 +1,138 @@
+{
+  "months translation": "-----------------------------------",
+  "JANUARY":  "January",
+  "FEBRUARY": "February",
+  "MARCH":  "March",
+  "APRIL": "April",
+  "MAY":  "May",
+  "JUNE": "June",
+  "JULY":  "July",
+  "AUGUST": "August",
+  "SEPTEMBER":  "September",
+  "OCTOBER": "October",
+  "NOVEMBER":  "November",
+  "DECEMBER": "December",
+
+  "week days translation": "-----------------------------------",
+  "MONDAY": "Monday",
+  "TUESDAY": "Tuesday",
+  "WEDNESDAY": "Wednesday",
+  "THURSDAY": "Thursday",
+  "FRIDAY": "Friday",
+  "SATURDAY": "Saturday",
+  "SUNDAY": "Sunday",
+
+  "menu items translation": "-----------------------------------",
+  "MENU": {
+    "MAIN": "Main",
+    "ABOUT_US": "About Us",
+    "BLOG": "Blog",
+    "CONTACT_US": "Contact Us",
+    "SIGN_IN": "Sign In",
+    "SIGN_UP": "Sign Up",
+
+    "SIGN_OUT": "Sign Out",
+    "DASHBOARD": "Dashboard",
+    "CHANGE_PASSWORD": "Change Password",
+    "EMPLOYEES": "Employees",
+    "DEPARTMENTS": "Departments",
+    "APPLICANTS": "Applicants",
+    "EXPENSES": "Expenses",
+    "SUBSCRIPTION": "Subscription",
+    "SETTINGS": "Settings"
+  },
+
+  "authentication messages translation": "-----------------------------------",
+  "EMAIL_ALREADY_EXISTS": "Email already exists",
+  "EMAIL_PASSWORD_WRONG": "Wrong email or password",
+  "ENTER_VALID_EMAIL": "Please enter valid email",
+  "ENTER_VALID_PASSWORD": "Please enter valid password",
+  "PLEASE_CONFIRM_EMAIL": "Please confirm email sent from servebmt",
+  "CHECK_EMAIL": "Please check your email to complete registration",
+  "PASSWORDS_DONT_MATCH": "Passwords don't match",
+  "PASSWORD_CHANGE_SUCCESS": "You have successfully changed your password",
+  "CHECK_EMAIL_PASSWORD_RESET": "Please check your email to reset your password",
+  "EMAIL_NOT_EXISTS": "Email does not exist",
+
+  "settings translation": "-----------------------------------",
+  "USER_SETTINGS_CHANGE_SUCCESS": "You have successfully changed settings",
+
+  "home page translation": "-----------------------------------",
+  "MAIN": {
+    "INTRODUCTION_HEADER": "Short introduction",
+    "INTRODUCTION_TEXT": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+
+  "QA": {
+    "HEADER": "Usage guide",
+    "QUESTION_1": "How to register?",
+    "ANSWER_1": "occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+
+  "SUBSCRIPTION": {
+    "HEADER": "Price list",
+    "CONDITION": "Up to {{peopleCount}} people included.",
+    "UNLIMITED_CONDITION": "Unlimited number of people.",
+    "TECH_SUPPORT": "Free technical support.",
+    "TRAININGS": "Free online training."
+  },
+
+  "CONTACT": {
+    "HEADER": "Contact us",
+    "ADDRESS": "Aaron Hawkins 5587 Nunc. Avenue.",
+    "EMAIL_BEEN_SENT": "Email has been sent"
+  },
+
+  "global translation": "-----------------------------------",
+  "ERROR": "error",
+  "INTERNAL_ERROR": "internal error",
+  "SUCCESS": "success",
+  "COMING_SOON": "coming soon...",
+  "SIGN_IN": "sign in",
+  "SIGN_UP": "sign Up",
+  "CHOOSE": "choose",
+  "SEND": "send",
+  "FREE": "free",
+  "GOLD": "gold",
+  "PREMIUM": "premium",
+  "UNLIMITED": "unlimited",
+  "SUBJECT": "subject",
+  "EMAIL": "email",
+  "TEXT": "text",
+  "YOUR_NAME": "your name",
+  "COMPANY_NAME": "company name",
+  "NAME_PERSON": "name",
+  "NAME": "name",
+  "PASSWORD": "password",
+  "NEW_PASSWORD": "new password",
+  "CONFIRM_PASSWORD": "confirm password",
+  "CHANGE_PASSWORD": "change password",
+  "MONTH": "month",
+  "DAY": "day",
+  "YEAR": "year",
+
+  "input placeholder": "-----------------------------------",
+  "ENTER_SUBJECT": "enter subject",
+  "ENTER_EMAIL": "enter email",
+  "ENTER_TEXT": "enter text",
+  "ENTER_PASSWORD": "enter password",
+  "ENTER_COMPANY_NAME": "enter company name",
+  "ENTER_YOUR_NAME": "enter your name",
+  "ENTER_NAME": "enter your name",
+
+  "footer texts": "-----------------------------------",
+  "ALL_RIGHTS_RESERVED": "All rights reserved.",
+
+  "forgot password texts": "-----------------------------------",
+  "FORGOT_PASSWORD": "Forgot Password",
+  "FORGOT_PASSWORD?": "Forgot password ?",
+  "BACK_TO_SIGN_IN": "Back to sign in",
+  "SEND_EMAIL": "Send Email",
+
+  "input validation texts": "-----------------------------------",
+  "VALIDATION": {
+    "MIN_3_CHARACTERS": "requires three or more characters",
+    "MIN_6_CHARACTERS": "requires six or more characters",
+    "MIN_8_CHARACTERS": "requires eight or more characters"
+  }
+}

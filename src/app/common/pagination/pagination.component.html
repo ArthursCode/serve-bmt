@@ -1,0 +1,13 @@
+<div class="bmt-pagination">
+  <div class="bmt-pagination__content">
+    <div class="bmt-pagination__prev" [ngClass]="{'disabled': currentPage === 1}" (click)="changePage('prev')"><i class="fa fa-angle-left"></i></div>
+    <div class="bmt-pagination__current"><u>{{currentPage}}</u></div>
+    <div class="bmt-pagination__next" [ngClass]="{'disabled': currentPage === length}" (click)="changePage('next')"><i class="fa fa-angle-right"></i></div>
+    <div class="bmt-pagination__pages-info">
+      {{currentPage}} of {{length}}
+    </div>
+  </div>
+  <div class="bmt-pagination__total">
+    <span>Total {{total}}</span>
+  </div>
+</div>

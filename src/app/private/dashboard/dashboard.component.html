@@ -1,0 +1,62 @@
+<div class="page-main">
+  <div class="chart-container">
+    <div class="row-custom">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="header-item" (click)="redirectTo('employees')">
+          <div class="header-item__icon icon-blue">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="header-item__info">
+            <div class="heading-text">Employees</div>
+            <div><span>Total </span><ng9-odometer [number]="25"></ng9-odometer></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="header-item" (click)="redirectTo('departments')">
+          <div class="header-item__icon icon-purple">
+            <i class="fa fa-briefcase"></i>
+          </div>
+          <div class="header-item__info">
+            <div class="heading-text">Departments</div>
+            <div><span>Total </span><ng9-odometer [number]="4"></ng9-odometer></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="header-item" (click)="redirectTo('expenses')">
+          <div class="header-item__icon icon-pink">
+            <i class="fa fa-money"></i>
+          </div>
+          <div class="header-item__info">
+            <div class="heading-text">Expenses</div>
+            <div><span>Total </span><ng9-odometer [number]="250000"></ng9-odometer>$</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="header-item" (click)="redirectTo('subscription')">
+          <div class="header-item__icon icon-orange">
+            <i class="fa fa-dollar"></i>
+          </div>
+          <div class="header-item__info">
+            <div class="heading-text">Subscription</div>
+            <div><span>Total </span><ng9-odometer [number]="25"></ng9-odometer>%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-custom">
+      <div class="col-lg-8 mb-4">
+        <div class="chart-item">
+          <ngx-chart-bar></ngx-chart-bar>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="chart-item">
+          <ngx-chart-pie></ngx-chart-pie>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

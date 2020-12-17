@@ -1,0 +1,71 @@
+<div class="row">
+  <form class="expenses-setup col-12" #cont [formGroup]="otherForm">
+    <div class="expenses-setup__header pb-2 mb-2">
+      <div>Other costs</div>
+      <div class="expenses-setup__buttons">
+        <div class="mr-2">
+          <button class="bmt-btn" type="button" (click)="getCosts()">Reset</button>
+        </div>
+        <div class="mr-2">
+          <button class="bmt-btn" type="submit" (click)="saveChanges()">Save changes</button>
+        </div>
+        <div class="plus" matTooltip="Add cost" (click)="addItem(cont)">
+          <svg width="21px" height="21px" viewBox="0 0 48 48" style="fill: #fff;" ><path d="M38 26H26v12h-4V26H10v-4h12V10h4v12h12v4z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="no-data" *ngIf="otherForm.get('items')['controls'].length===0">
+      <img src="/assets/images/svg/no-data.svg" alt="no data">
+      <p>No data found</p>
+    </div>
+    <ng-container [formArrayName]="'items'"
+                  *ngFor="let item of otherForm.get('items')['controls']; let i = index;">
+      <div class="other-expenses" [formGroupName]="i">
+        <mat-accordion class="cost-accordion">
+          <mat-expansion-panel class="mb-3" [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <div class="expenses-setup__item w-100">
+                  <div class="expenses-setup__title">
+                    <input (click)="$event.stopPropagation();"
+                           [ngClass]="{'poor-input--error': !item.get('sub_category').valid && saved}"
+                           (keydown)="$event.stopPropagation()"
+                           class="poor-input"
+                           type="text"
+                           formControlName="sub_category"
+                           placeholder="category"
+                           required
+                    >
+                  </div>
+                </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="expenses-setup__edit">
+              <div class="expenses-setup__inputs">
+                <mat-form-field appearance="fill" class="cost-datepicker">
+                  <mat-label>Payed date</mat-label>
+                  <input matInput [matDatepicker]="picker" (dateChange)="changeDate(this.otherForm.get('items')['controls'][i])" formControlName="payment_date" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="cost-sum">
+                  <mat-label>Sum</mat-label>
+                  <input matInput formControlName="sum" oninput="validity.valid||(value='');" type="number" min="0">
+                </mat-form-field>
+                <div class="daily-info" *ngIf="item.get('daily_info')?.value">
+                  <strong><i class="fa fa-info-circle"></i></strong> {{item.get('daily_info').value}}.
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="action action--red" (click)="removeItem(i)">
+                  <i class="fa fa-trash"></i>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </ng-container>
+  </form>
+</div>
+

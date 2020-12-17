@@ -1,0 +1,33 @@
+::ng-deep{
+  .cost-accordion{
+    .mat-expansion-panel-body{
+      padding: 15px;
+    }
+
+  }
+  .cost-datepicker{
+    margin-right: 5px;
+    font-size: 12px;
+    .mat-form-field-flex {
+      background: none;
+      .mat-form-field-infix{
+        width: auto;
+      }
+      .mat-icon-button{
+        outline: none;
+      }
+    }
+  }
+  .cost-sum{
+    font-size: 12px;
+    .mat-form-field-flex {
+      background: none;
+      .mat-form-field-infix{
+        width: auto;
+      }
+      .mat-icon-button{
+        outline: none;
+      }
+    }
+  }
+}
