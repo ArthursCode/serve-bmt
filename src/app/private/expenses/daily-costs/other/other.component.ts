@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
-import {TranslateService} from "@ngx-translate/core";
-import {DailyCostsService} from "../daily-costs.service";
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
-import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
-import {MY_FORMATS} from "../staff/staff.component";
-import * as _moment from "moment";
-import {dateFormat, infoDateFormat} from "../../../../common/constants/constants";
-import {SaveCostsComponent} from "../modals/save-costs/save-costs.component";
-import {MatDialog} from "@angular/material/dialog";
-import {scrollBottom} from "../../../../common/functions/scrolling";
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
+import {DailyCostsService} from '../daily-costs.service';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MY_FORMATS} from '../staff/staff.component';
+import * as _moment from 'moment';
+import {dateFormat, infoDateFormat} from '../../../../common/constants/constants';
+import {SaveCostsComponent} from '../modals/save-costs/save-costs.component';
+import {MatDialog} from '@angular/material/dialog';
+import {scrollBottom} from '../../../../common/functions/scrolling';
 
 @Component({
   selector: 'app-other',
@@ -54,7 +54,7 @@ export class OtherComponent implements OnInit {
 
   initOtherForm(list) {
     this.otherForm = this.fb.group({
-      items: list? this.fb.array(this.mapCosts(list)): this.fb.array([])
+      items: list ? this.fb.array(this.mapCosts(list)) : this.fb.array([])
     });
   }
 
@@ -75,7 +75,7 @@ export class OtherComponent implements OnInit {
   }
 
   getDate(data) {
-    if(data) {
+    if (data) {
       return _moment(data, 'MM-DD-YYYY').toDate();
     }
   }
@@ -97,11 +97,11 @@ export class OtherComponent implements OnInit {
     this.searchParamsDaily.sub_category = item.value.sub_category;
     this.costsService.getExpensesDaily(this.searchParamsDaily).subscribe(
       res => {
-        item.get('daily_info').setValue(res.data && res.data.sum? `Payed $${res.data.sum || 0} on ${_moment(res.data.payment_date, 'MM-DD-YYYY').format(infoDateFormat)}`: '');
-        item.get('sum').setValue( res.data? res.data.sum: '');
+        item.get('daily_info').setValue(res.data && res.data.sum ? `Payed $${res.data.sum || 0} on ${_moment(res.data.payment_date, 'MM-DD-YYYY').format(infoDateFormat)}` : '');
+        item.get('sum').setValue( res.data ? res.data.sum : '');
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }
@@ -110,19 +110,19 @@ export class OtherComponent implements OnInit {
 
   saveChanges() {
     this.saved = true;
-    if(!this.otherForm.valid){
+    if (!this.otherForm.valid){
       return;
     }
-    let reqObj = {
+    const reqObj = {
       type: this.searchParams.category,
       items: this.otherForm.value.items
     };
     reqObj.items.map(el => {
-      delete el['daily_info'];
-      el['payment_date'] = _moment(el['payment_date'], 'MM-DD-YYYY').format(dateFormat);
+      delete el.daily_info;
+      el.payment_date = _moment(el.payment_date, 'MM-DD-YYYY').format(dateFormat);
     });
 
-    let dialogRef = this.dialog.open(SaveCostsComponent);
+    const dialogRef = this.dialog.open(SaveCostsComponent);
     dialogRef.componentInstance.onSave.subscribe(() => {
       this.saveRecords(reqObj);
       dialogRef.close();
@@ -133,16 +133,16 @@ export class OtherComponent implements OnInit {
     this.costsService.postChangeExpenses(reqObj)
       .subscribe(
         res => {
-          this.translate.get(res.message || 'SUCCESS').subscribe((text:string) => {
+          this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
             this.toastr.success(text);
           });
         },
         err => {
-          this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+          this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
             this.toastr.error(text);
           });
         }
-      )
+      );
   }
 
   getCosts() {
@@ -151,7 +151,7 @@ export class OtherComponent implements OnInit {
         this.initOtherForm(res.data);
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }

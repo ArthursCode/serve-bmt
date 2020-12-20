@@ -6,6 +6,9 @@
     margin: 0 auto;
     overflow-x: auto;
     max-width: 1200px;
+    .mat-table{
+      min-width: 800px;
+    }
   }
   .table-filters{
     &__select{

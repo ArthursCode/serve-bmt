@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {PublicModule} from './public/public.module';
 import {PrivateModule} from './private/private.module';
-import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthService} from './common/auth/auth.service';
 import {AuthGuard} from './common/auth/auth.guard';
@@ -33,7 +33,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AppRoutingModule,
     PublicModule,
     PrivateModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
     NgbModule,
@@ -42,14 +41,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatListModule,
     MatToolbarModule,
-    NoopAnimationsModule,
-
 
 
     NgxUiLoaderModule.forRoot({
       bgsPosition: 'bottom-center',
     }),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,

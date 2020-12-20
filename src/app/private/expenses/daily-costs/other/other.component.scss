@@ -48,3 +48,22 @@
     opacity: 1;
   }
 }
+.poor-input{
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid black;
+  outline: none;
+  &--error{
+    border-color: red;
+    &::-webkit-input-placeholder {
+      color: red;
+    }
+    &:-moz-placeholder {
+      color: red;
+    }
+    &::-moz-placeholder {
+      color: red;
+    }
+  }
+}
