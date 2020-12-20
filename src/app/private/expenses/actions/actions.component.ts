@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from "@angular/material/paginator";
-import {ExpensesService} from "../expenses.service";
-import {ToastrService} from "ngx-toastr";
-import {TranslateService} from "@ngx-translate/core";
-import * as _moment from "moment";
-import {dateTimeFormat, tableDateFormat} from "../../../common/constants/constants";
-import {RemoveCostsComponent} from "./modals/remove-costs/remove-costs.component";
-import {MatDialog} from "@angular/material/dialog";
+import {MatPaginator} from '@angular/material/paginator';
+import {ExpensesService} from '../expenses.service';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
+import * as _moment from 'moment';
+import {dateTimeFormat, tableDateFormat} from '../../../common/constants/constants';
+import {RemoveCostsComponent} from './modals/remove-costs/remove-costs.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-actions',
@@ -26,7 +26,7 @@ export class ActionsComponent implements OnInit {
   costListParams = {
     current: 1,
     per_page: 10
-  }
+  };
 
   constructor(private expensesService: ExpensesService,
               private toastr: ToastrService,
@@ -38,17 +38,18 @@ export class ActionsComponent implements OnInit {
   }
 
   getCostsList(event) {
+    this.costListParams = event;
     this.allChecked = false;
     this.expensesService.getExpensesList(event).subscribe(
       res => {
-        if(res){
+        if (res){
           this.length = res.length;
           this.total = res.total;
           this.dataSource = res.data;
         }
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }
@@ -56,43 +57,43 @@ export class ActionsComponent implements OnInit {
   }
 
   adjustText(el){
-    if(el.category !== 'other'){
+    if (el.category !== 'other'){
       return el.sub_category.replace('_', ' ');
     }
-    return el.sub_category
+    return el.sub_category;
   }
 
   formatDate(date){
-    if(date){
-      return _moment(date, 'MM-DD-YYYY').format(tableDateFormat)
+    if (date){
+      return _moment(date, 'MM-DD-YYYY').format(tableDateFormat);
     }
     return '';
   }
 
   formatTime(date){
-    if(date){
+    if (date){
       return _moment(date).format(dateTimeFormat);
     }
     return '';
   }
 
   getCategory(category) {
-    if(category === 'other'){
-      return 'Other Costs'
+    if (category === 'other'){
+      return 'Other Costs';
     }
-    if(category === 'staff'){
-      return 'Staff And Benefits'
+    if (category === 'staff'){
+      return 'Staff And Benefits';
     }
-    if(category === 'operating'){
-      return 'Operating Costs'
+    if (category === 'operating'){
+      return 'Operating Costs';
     }
-    if(category === 'admin'){
-      return 'Administrative Costs'
+    if (category === 'admin'){
+      return 'Administrative Costs';
     }
   }
 
   removeOne(elem) {
-    let dialogRef = this.dialog.open(RemoveCostsComponent);
+    const dialogRef = this.dialog.open(RemoveCostsComponent);
     dialogRef.componentInstance.onRemove.subscribe(() => {
       this.removeRecords([elem]);
       dialogRef.close();
@@ -100,13 +101,13 @@ export class ActionsComponent implements OnInit {
   }
 
   removeSelected() {
-    let data = [];
+    const data = [];
     this.dataSource.map(el => {
-      if(el.isSelected){
+      if (el.isSelected){
         data.push(el);
       }
     });
-    let dialogRef = this.dialog.open(RemoveCostsComponent);
+    const dialogRef = this.dialog.open(RemoveCostsComponent);
     dialogRef.componentInstance.onRemove.subscribe(() => {
       this.removeRecords(data);
       dialogRef.close();
@@ -116,13 +117,13 @@ export class ActionsComponent implements OnInit {
   removeRecords(data) {
     this.expensesService.removeExpenses(data).subscribe(
       res => {
-        this.translate.get(res.message || 'SUCCESS').subscribe((text:string) => {
+        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
           this.toastr.success(text);
         });
         this.getCostsList(this.costListParams);
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }
