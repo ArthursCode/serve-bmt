@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
+import * as _moment from 'moment';
+import {dateFormat} from '../../common/constants/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,19 @@ export class ExpensesService {
   }
 
   getExpensesList(params) {
+    const newParams = {
+      current: params.current,
+      per_page: params.per_page,
+      math_op: params.filters.math_op.key || '=',
+      sum: params.filters.sum,
+      payment_date: params.filters.payment_date && _moment(params.filters.payment_date, 'MM-DD-YYYY').format(dateFormat),
+      sub_category: params.filters.sub_category.map(el => {
+        return el.key;
+      })
+    };
     return this.http.get<any>(`${this.API_URL}/api/v1/expenses-list`, {
       params: {
-        ...params,
+        ...newParams,
       }
     });
   }

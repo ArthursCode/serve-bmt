@@ -43,3 +43,35 @@ table {
     }
   }
 }
+
+::ng-deep{
+  .filters_area{
+    .filter-datepicker{
+      margin-right: 5px;
+      font-size: 12px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+    .filter-sum{
+      font-size: 12px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+  }
+}

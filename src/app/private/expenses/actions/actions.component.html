@@ -1,8 +1,55 @@
 <div class="bmt-table">
+
+  <div class="filters_area row">
+    <div class="col-lg-4 mb-3">
+      <ng-select [items]="categoryAll"
+                 bindLabel="label"
+                 groupBy="group"
+                 placeholder="Filter by category"
+                 [(ngModel)]="costListParams.filters.sub_category"
+                 [multiple]="true"
+                 [selectableGroup]="true"
+                 [selectableGroupAsModel]="false">
+        <ng-template ng-optgroup-tmp let-item="item">
+          {{item.group}}
+        </ng-template>
+      </ng-select>
+    </div>
+    <div class="col-lg-2 mb-3">
+      <mat-form-field appearance="fill" class="filter-datepicker">
+        <mat-label>Payment date</mat-label>
+        <input matInput [matDatepicker]="pickerFilter" [(ngModel)]="costListParams.filters.payment_date" readonly>
+        <mat-datepicker-toggle matSuffix [for]="pickerFilter"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFilter></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-2 d-flex mb-3">
+      <mat-form-field appearance="fill" class="filter-sum">
+        <mat-label>Sum</mat-label>
+        <input matInput oninput="validity.valid||(value='');" [(ngModel)]="costListParams.filters.sum" type="number" min="0">
+      </mat-form-field>
+      <div>
+        <ng-select [items]="mathOps"
+                   [clearable]="false"
+                   [searchable]="false"
+                   [(ngModel)]="costListParams.filters.math_op"
+                   bindLabel="key">
+        </ng-select>
+      </div>
+    </div>
+    <div class="col-lg-4 d-flex mb-3">
+      <div class="ml-auto">
+        <button class="bmt-btn mr-1" type="button" (click)="resetFilters()">Reset</button>
+        <button class="bmt-btn" type="button" (click)="getCostsList(costListParams)">Search</button>
+      </div>
+    </div>
+  </div>
+
   <div class="no-data" *ngIf="dataSource.length===0">
     <img src="/assets/images/svg/no-data.svg" alt="no data">
     <p>No data found</p>
   </div>
+
   <div class="mat-elevation-z8 actions" *ngIf="dataSource.length>0">
     <table mat-table [dataSource]="dataSource">
 

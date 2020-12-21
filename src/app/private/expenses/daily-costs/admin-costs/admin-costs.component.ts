@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder} from '@angular/forms';
 import * as _moment from 'moment';
-import {ToastrService} from "ngx-toastr";
-import {TranslateService} from "@ngx-translate/core";
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {dateFormat, infoDateFormat} from "../../../../common/constants/constants";
-import {DailyCostsService} from "../daily-costs.service";
-import {SaveCostsComponent} from "../modals/save-costs/save-costs.component";
-import {MatDialog} from "@angular/material/dialog";
+import {dateFormat, infoDateFormat} from '../../../../common/constants/constants';
+import {DailyCostsService} from '../daily-costs.service';
+import {SaveCostsComponent} from '../modals/save-costs/save-costs.component';
+import {MatDialog} from '@angular/material/dialog';
 
 export const MY_FORMATS = {
   parse: {
@@ -64,36 +64,36 @@ export class AdminCostsComponent implements OnInit {
   initAdminForm(data) {
     this.adminForm = this.fb.group({
       advertising: this.fb.group({
-        payment_date: [this.getDateByCategory(data, 'advertising') ? this.getDateByCategory(data, 'advertising'): new Date()],
-        sum: [this.getSumByCategory(data, 'advertising') ? this.getSumByCategory(data, 'advertising'): ''],
+        payment_date: [this.getDateByCategory(data, 'advertising') ? this.getDateByCategory(data, 'advertising') : new Date()],
+        sum: [this.getSumByCategory(data, 'advertising') ? this.getSumByCategory(data, 'advertising') : ''],
         category: 'admin',
         sub_category: 'advertising',
         daily_info: ''
       }),
       subscriptions: this.fb.group({
-        payment_date: [this.getDateByCategory(data, 'subscriptions') ? this.getDateByCategory(data, 'subscriptions'): new Date()],
-        sum: [this.getSumByCategory(data, 'subscriptions') ? this.getSumByCategory(data, 'subscriptions'): ''],
+        payment_date: [this.getDateByCategory(data, 'subscriptions') ? this.getDateByCategory(data, 'subscriptions') : new Date()],
+        sum: [this.getSumByCategory(data, 'subscriptions') ? this.getSumByCategory(data, 'subscriptions') : ''],
         category: 'admin',
         sub_category: 'subscriptions',
         daily_info: ''
       }),
       accounting: this.fb.group({
-        payment_date: [this.getDateByCategory(data, 'accounting') ? this.getDateByCategory(data, 'accounting'): new Date()],
-        sum: [this.getSumByCategory(data, 'accounting') ? this.getSumByCategory(data, 'accounting'): ''],
+        payment_date: [this.getDateByCategory(data, 'accounting') ? this.getDateByCategory(data, 'accounting') : new Date()],
+        sum: [this.getSumByCategory(data, 'accounting') ? this.getSumByCategory(data, 'accounting') : ''],
         category: 'admin',
         sub_category: 'accounting',
         daily_info: ''
       }),
       repairs: this.fb.group({
-        payment_date: [this.getDateByCategory(data, 'repairs') ? this.getDateByCategory(data, 'repairs'): new Date()],
-        sum: [this.getSumByCategory(data, 'repairs') ? this.getSumByCategory(data, 'repairs'): ''],
+        payment_date: [this.getDateByCategory(data, 'repairs') ? this.getDateByCategory(data, 'repairs') : new Date()],
+        sum: [this.getSumByCategory(data, 'repairs') ? this.getSumByCategory(data, 'repairs') : ''],
         category: 'admin',
         sub_category: 'repairs',
         daily_info: ''
       }),
       supplies: this.fb.group({
-        payment_date: [this.getDateByCategory(data, 'supplies') ? this.getDateByCategory(data, 'supplies'): new Date()],
-        sum: [this.getSumByCategory(data, 'supplies') ? this.getSumByCategory(data, 'supplies'): ''],
+        payment_date: [this.getDateByCategory(data, 'supplies') ? this.getDateByCategory(data, 'supplies') : new Date()],
+        sum: [this.getSumByCategory(data, 'supplies') ? this.getSumByCategory(data, 'supplies') : ''],
         category: 'admin',
         sub_category: 'supplies',
         daily_info: ''
@@ -102,39 +102,39 @@ export class AdminCostsComponent implements OnInit {
   }
 
   getSumByCategory(data, category) {
-    if(data.length>0) {
-      const _obj = data.find(obj => {
+    if (data.length > 0) {
+      const _OBJ = data.find(obj => {
         return obj.sub_category === category;
       });
-      return _obj? _obj.sum: null;
+      return _OBJ ? _OBJ.sum : null;
     }
   }
 
   getDateByCategory(data, category) {
-    if(data.length > 0) {
-      const _obj = data.find(obj => {
+    if (data.length > 0) {
+      const _OBJ = data.find(obj => {
         return obj.sub_category === category;
       });
-      return _obj? _moment(_obj.payment_date, 'MM-DD-YYYY').toDate() : null;
+      return _OBJ ? _moment(_OBJ.payment_date, 'MM-DD-YYYY').toDate() : null;
     }
   }
 
   saveChanges(category) {
-    let reqObj = {
+    const reqObj = {
       type: this.searchParams.category,
       items: []
     };
-    if(category === 'all'){
+    if (category === 'all'){
       reqObj.items = Object.values(this.adminForm.value);
     } else{
       reqObj.items = [this.adminForm.controls[category].value];
     }
     reqObj.items.map(el => {
-      delete el['daily_info'];
-      el['payment_date'] = _moment(el['payment_date'], 'MM-DD-YYYY').format(dateFormat);
+      delete el.daily_info;
+      el.payment_date = _moment(el.payment_date, 'MM-DD-YYYY').format(dateFormat);
     });
 
-    let dialogRef = this.dialog.open(SaveCostsComponent);
+    const dialogRef = this.dialog.open(SaveCostsComponent);
     dialogRef.componentInstance.onSave.subscribe(() => {
       this.saveRecords(reqObj);
       dialogRef.close();
@@ -145,16 +145,16 @@ export class AdminCostsComponent implements OnInit {
     this.costsService.postChangeExpenses(reqObj)
       .subscribe(
         res => {
-          this.translate.get(res.message || 'SUCCESS').subscribe((text:string) => {
+          this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
             this.toastr.success(text);
           });
         },
         err => {
-          this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+          this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
             this.toastr.error(text);
           });
         }
-      )
+      );
   }
 
   getCosts() {
@@ -163,7 +163,7 @@ export class AdminCostsComponent implements OnInit {
         this.initAdminForm(res.data);
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }
@@ -176,10 +176,10 @@ export class AdminCostsComponent implements OnInit {
     this.costsService.getExpensesDaily(this.searchParamsDaily).subscribe(
       res => {
         this.adminForm.controls[category].get('sum').setValue(res.data ? res.data.sum : '');
-        this.adminForm.controls[category].get('daily_info').setValue(res.data && res.data.sum? `Payed $${res.data.sum || 0} on ${_moment(res.data.payment_date, 'MM-DD-YYYY').format(infoDateFormat)}`: '');
+        this.adminForm.controls[category].get('daily_info').setValue(res.data && res.data.sum ? `Payed $${res.data.sum || 0} on ${_moment(res.data.payment_date, 'MM-DD-YYYY').format(infoDateFormat)}` : '');
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }

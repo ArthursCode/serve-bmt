@@ -4,14 +4,26 @@ import {ExpensesService} from '../expenses.service';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import * as _moment from 'moment';
-import {dateTimeFormat, tableDateFormat} from '../../../common/constants/constants';
+import {dateFormat, dateTimeFormat, tableDateFormat} from '../../../common/constants/constants';
 import {RemoveCostsComponent} from './modals/remove-costs/remove-costs.component';
 import {MatDialog} from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MY_FORMATS} from '../daily-costs/staff/staff.component';
 
 @Component({
   selector: 'app-actions',
   templateUrl: './actions.component.html',
-  styleUrls: ['./actions.component.scss']
+  styleUrls: ['./actions.component.scss'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
 export class ActionsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -19,13 +31,43 @@ export class ActionsComponent implements OnInit {
   dataSource = [];
   allChecked = false;
   zero = 0;
+  mathOps = [
+    {key: '>='},
+    {key: '='},
+    {key: '<='}
+  ];
+
+  categoryAll = [
+    { label: 'Other', key: 'other', group: null, child: { state: 'Active' } },
+    { label: 'Employee salaries', key: 'salaries', group: 'Staff and benefits', child: { state: 'Active' } },
+    { label: 'Payroll taxes', key: 'taxes', group: 'Staff and benefits', child: { state: 'Active' } },
+    { label: 'Employee Benefits and Pensions', key: 'benefits', group: 'Staff and benefits', child: { state: 'Active' } },
+    { label: 'Insurances', key: 'insurances', group: 'Staff and benefits', child: { state: 'Active' } },
+
+    { label: 'Utilities and phone', key: 'utilities', group: 'Operating costs', child: { state: 'Active' } },
+    { label: 'Building rent and expenses', key: 'building', group: 'Operating costs', child: { state: 'Active' } },
+    { label: 'Equipment lease', key: 'equipment_leases', group: 'Operating costs', child: { state: 'Active' } },
+    { label: 'Equipment expenses', key: 'equipment_expenses', group: 'Operating costs', child: { state: 'Active' } },
+
+    { label: 'Advertising', key: 'advertising', group: 'Administrative costs', child: { state: 'Active' } },
+    { label: 'Dues and subscriptions', key: 'subscriptions', group: 'Administrative costs', child: { state: 'Active' } },
+    { label: 'Legal and accounting', key: 'accounting', group: 'Administrative costs', child: { state: 'Active' } },
+    { label: 'Repairs an maintenance', key: 'repairs', group: 'Administrative costs', child: { state: 'Active' } },
+    { label: 'Office and computer supplies', key: 'supplies', group: 'Administrative costs', child: { state: 'Active' } },
+  ];
 
   length = 0;
   total = 0;
 
   costListParams = {
     current: 1,
-    per_page: 10
+    per_page: 10,
+    filters: {
+      sum: '',
+      math_op: '=',
+      payment_date: '',
+      sub_category: []
+    }
   };
 
   constructor(private expensesService: ExpensesService,
@@ -38,9 +80,9 @@ export class ActionsComponent implements OnInit {
   }
 
   getCostsList(event) {
-    this.costListParams = event;
+    this.costListParams = {...this.costListParams, ...event};
     this.allChecked = false;
-    this.expensesService.getExpensesList(event).subscribe(
+    this.expensesService.getExpensesList(this.costListParams).subscribe(
       res => {
         if (res){
           this.length = res.length;
@@ -144,5 +186,15 @@ export class ActionsComponent implements OnInit {
     this.dataSource.map(el => {
       el.isSelected = ev.checked;
     });
+  }
+
+  resetFilters() {
+    this.costListParams.filters = {
+      sum: '',
+      math_op: '=',
+      payment_date: '',
+      sub_category: []
+    };
+    this.getCostsList(this.costListParams);
   }
 }
