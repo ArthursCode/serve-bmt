@@ -9,18 +9,7 @@ import {dateFormat, infoDateFormat} from '../../../../common/constants/constants
 import {DailyCostsService} from '../daily-costs.service';
 import {SaveCostsComponent} from '../modals/save-costs/save-costs.component';
 import {MatDialog} from '@angular/material/dialog';
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
+import {MY_FORMATS} from '../staff/staff.component';
 
 @Component({
   selector: 'app-admin-costs',

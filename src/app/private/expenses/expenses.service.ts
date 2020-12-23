@@ -22,7 +22,8 @@ export class ExpensesService {
       per_page: params.per_page,
       math_op: params.filters.math_op.key || '=',
       sum: params.filters.sum,
-      payment_date: params.filters.payment_date && _moment(params.filters.payment_date, 'MM-DD-YYYY').format(dateFormat),
+      start: params.filters.start && _moment(params.filters.start, 'MM-DD-YYYY').format(dateFormat) || '',
+      end: params.filters.end && _moment(params.filters.end, 'MM-DD-YYYY').format(dateFormat) || '',
       sub_category: params.filters.sub_category.map(el => {
         return el.key;
       })

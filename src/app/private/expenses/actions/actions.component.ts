@@ -4,7 +4,13 @@ import {ExpensesService} from '../expenses.service';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import * as _moment from 'moment';
-import {dateFormat, dateTimeFormat, tableDateFormat} from '../../../common/constants/constants';
+import {
+  categoryAllItems,
+  dateTimeFormat,
+  getCategoryName,
+  getSubCategoryName,
+  tableDateFormat
+} from '../../../common/constants/constants';
 import {RemoveCostsComponent} from './modals/remove-costs/remove-costs.component';
 import {MatDialog} from '@angular/material/dialog';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -21,7 +27,6 @@ import {MY_FORMATS} from '../daily-costs/staff/staff.component';
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
-
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
 })
@@ -31,30 +36,15 @@ export class ActionsComponent implements OnInit {
   dataSource = [];
   allChecked = false;
   zero = 0;
+  isLoading = true;
+
   mathOps = [
     {key: '>='},
     {key: '='},
     {key: '<='}
   ];
 
-  categoryAll = [
-    { label: 'Other', key: 'other', group: null, child: { state: 'Active' } },
-    { label: 'Employee salaries', key: 'salaries', group: 'Staff and benefits', child: { state: 'Active' } },
-    { label: 'Payroll taxes', key: 'taxes', group: 'Staff and benefits', child: { state: 'Active' } },
-    { label: 'Employee Benefits and Pensions', key: 'benefits', group: 'Staff and benefits', child: { state: 'Active' } },
-    { label: 'Insurances', key: 'insurances', group: 'Staff and benefits', child: { state: 'Active' } },
-
-    { label: 'Utilities and phone', key: 'utilities', group: 'Operating costs', child: { state: 'Active' } },
-    { label: 'Building rent and expenses', key: 'building', group: 'Operating costs', child: { state: 'Active' } },
-    { label: 'Equipment lease', key: 'equipment_leases', group: 'Operating costs', child: { state: 'Active' } },
-    { label: 'Equipment expenses', key: 'equipment_expenses', group: 'Operating costs', child: { state: 'Active' } },
-
-    { label: 'Advertising', key: 'advertising', group: 'Administrative costs', child: { state: 'Active' } },
-    { label: 'Dues and subscriptions', key: 'subscriptions', group: 'Administrative costs', child: { state: 'Active' } },
-    { label: 'Legal and accounting', key: 'accounting', group: 'Administrative costs', child: { state: 'Active' } },
-    { label: 'Repairs an maintenance', key: 'repairs', group: 'Administrative costs', child: { state: 'Active' } },
-    { label: 'Office and computer supplies', key: 'supplies', group: 'Administrative costs', child: { state: 'Active' } },
-  ];
+  categoryAll = categoryAllItems;
 
   length = 0;
   total = 0;
@@ -65,7 +55,8 @@ export class ActionsComponent implements OnInit {
     filters: {
       sum: '',
       math_op: '=',
-      payment_date: '',
+      start: '',
+      end: '',
       sub_category: []
     }
   };
@@ -120,20 +111,11 @@ export class ActionsComponent implements OnInit {
   }
 
   getCategory(category) {
-    if (category === 'other'){
-      return 'Other Costs';
-    }
-    if (category === 'staff'){
-      return 'Staff And Benefits';
-    }
-    if (category === 'operating'){
-      return 'Operating Costs';
-    }
-    if (category === 'admin'){
-      return 'Administrative Costs';
-    }
+    return getCategoryName[category];
   }
-
+  getSubCategory(subCategory) {
+    return getSubCategoryName[subCategory] || subCategory;
+  }
   removeOne(elem) {
     const dialogRef = this.dialog.open(RemoveCostsComponent);
     dialogRef.componentInstance.onRemove.subscribe(() => {
@@ -192,7 +174,8 @@ export class ActionsComponent implements OnInit {
     this.costListParams.filters = {
       sum: '',
       math_op: '=',
-      payment_date: '',
+      start: '',
+      end: '',
       sub_category: []
     };
     this.getCostsList(this.costListParams);
