@@ -89,13 +89,6 @@ export class ActionsComponent implements OnInit {
     );
   }
 
-  adjustText(el){
-    if (el.category !== 'other'){
-      return el.sub_category.replace('_', ' ');
-    }
-    return el.sub_category;
-  }
-
   formatDate(date){
     if (date){
       return _moment(date, 'MM-DD-YYYY').format(tableDateFormat);

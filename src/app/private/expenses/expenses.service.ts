@@ -21,7 +21,7 @@ export class ExpensesService {
       current: params.current,
       per_page: params.per_page,
       math_op: params.filters.math_op.key || '=',
-      sum: params.filters.sum,
+      sum: params.filters.sum || '',
       start: params.filters.start && _moment(params.filters.start, 'MM-DD-YYYY').format(dateFormat) || '',
       end: params.filters.end && _moment(params.filters.end, 'MM-DD-YYYY').format(dateFormat) || '',
       sub_category: params.filters.sub_category.map(el => {
@@ -39,9 +39,20 @@ export class ExpensesService {
   }
 
   getBinExpensesList(params) {
+    const newParams = {
+      current: params.current,
+      per_page: params.per_page,
+      math_op: params.filters.math_op.key || '=',
+      sum: params.filters.sum || '',
+      start: params.filters.start && _moment(params.filters.start, 'MM-DD-YYYY').format(dateFormat) || '',
+      end: params.filters.end && _moment(params.filters.end, 'MM-DD-YYYY').format(dateFormat) || '',
+      sub_category: params.filters.sub_category.map(el => {
+        return el.key;
+      })
+    };
     return this.http.get<any>(`${this.API_URL}/api/v1/expenses-bin-list`, {
       params: {
-        ...params,
+        ...newParams,
       }
     });
   }
