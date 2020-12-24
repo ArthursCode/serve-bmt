@@ -11,6 +11,6 @@ export const scrollTop = () => {
 
 export const scrollBottom = (target) => {
   setTimeout(() => {
-    window.scrollTo(0, target.offsetHeight);
+    target.parentElement.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
   });
 };

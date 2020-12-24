@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {DailyCostsService} from '../daily-costs.service';
@@ -69,7 +69,7 @@ export class OtherComponent implements OnInit {
       payment_date: this.getDate(item.payment_date) || new Date(),
       sum: item.sum || '',
       category: 'other',
-      sub_category: item.sub_category || '',
+      sub_category: [item.sub_category || '', [Validators.required]],
       daily_info: ''
     });
   }
