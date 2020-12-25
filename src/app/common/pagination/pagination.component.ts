@@ -9,9 +9,8 @@ export class PaginationComponent implements OnInit {
   @Input() length;
   @Input() total;
   @Input() itemsPerPage;
+  @Input() currentPage;
   @Output() switchPage = new EventEmitter();
-
-  currentPage = 1;
 
   constructor() { }
 

@@ -173,4 +173,8 @@ export class ActionsComponent implements OnInit {
     };
     this.getCostsList(this.costListParams);
   }
+  searchRec() {
+    this.costListParams.current = 1;
+    this.getCostsList(this.costListParams);
+  }
 }

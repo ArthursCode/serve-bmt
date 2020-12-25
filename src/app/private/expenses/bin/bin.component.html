@@ -42,7 +42,7 @@
     <div class="col-lg-3 d-flex mb-3">
       <div class="ml-auto">
         <button class="bmt-btn mr-1" type="button" (click)="resetFilters()">Reset</button>
-        <button class="bmt-btn" type="button" (click)="getCostsList(costListParams)">Search</button>
+        <button class="bmt-btn" type="button" (click)="searchRec()">Search</button>
       </div>
     </div>
   </div>
@@ -130,6 +130,7 @@
       [length]="length"
       [total]="total"
       [itemsPerPage]="costListParams.per_page"
+      [currentPage]="costListParams.current"
       (change)="getCostsList($event)"
     ></app-pagination>
   </div>
