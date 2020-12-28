@@ -28,7 +28,7 @@ import {MY_FORMATS} from '../daily-costs/staff/staff.component';
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-  ],
+  ]
 })
 export class ActionsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

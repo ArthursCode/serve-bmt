@@ -1,0 +1,118 @@
+<div class="bmt-table">
+  <div class="filters_area row">
+    <div class="col-lg-2 d-flex mb-3">
+      <mat-form-field appearance="fill" class="filter-input">
+        <mat-label>Full Name</mat-label>
+        <input matInput [(ngModel)]="empListParams.filters.full_name" type="text">
+      </mat-form-field>
+    </div>
+    <div class="col-lg-2 d-flex mb-3">
+      <mat-form-field appearance="fill" class="filter-input">
+        <mat-label>Salary</mat-label>
+        <input matInput oninput="validity.valid||(value='');" [(ngModel)]="empListParams.filters.salary" type="number" min="0">
+      </mat-form-field>
+      <div>
+        <ng-select [items]="mathOps"
+                   [clearable]="false"
+                   [searchable]="false"
+                   [(ngModel)]="empListParams.filters.math_op_salary"
+                   bindLabel="key">
+        </ng-select>
+      </div>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <mat-form-field appearance="fill" class="filter-datepicker">
+        <mat-label>Enter date of birth range</mat-label>
+        <mat-date-range-input [rangePicker]="pickerEmployees">
+          <input matStartDate [(ngModel)]="empListParams.filters.start" placeholder="Start date" readonly>
+          <input matEndDate [(ngModel)]="empListParams.filters.end" placeholder="End date" readonly>
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="pickerEmployees"></mat-datepicker-toggle>
+        <mat-date-range-picker #pickerEmployees></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-5 d-flex mb-3">
+      <div class="ml-auto">
+        <button class="bmt-btn mr-1" type="button" (click)="resetFilters()">Reset</button>
+        <button class="bmt-btn mr-1" type="button" (click)="searchRec()">Search</button>
+        <button class="bmt-btn" type="button" (click)="addEmployee()" matTooltip="Add employee">
+          <svg width="21px" height="21px" viewBox="0 0 48 48" style="fill: #fff;" ><path d="M38 26H26v12h-4V26H10v-4h12V10h4v12h12v4z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-lg-3 mb-3">
+      <div class="card shadow radius20 user-info">
+        <div class="mt-4">
+                    <div class="avatar-img"></div>
+<!--          <div class="avatar-placeholder"><i class="fa fa-user-circle"></i></div>-->
+        </div>
+        <div class="card-body">
+          <div class="user-info__text"><p><span class="title">Name</span>Jane Smith</p></div>
+          <div class="user-info__text"><p><span class="title">Age</span>26</p></div>
+          <div class="user-info__text"><p><span class="title">Gender</span>Female</p></div>
+          <div class="user-info__text"><p><span class="title">Role</span>Accountant</p></div>
+          <div class="user-info__text mb-4"><p><span class="title">Department</span>Marketing</p></div>
+          <div class="user-info__actions row">
+            <div class="col-4">
+              <div class="employee-action employee-action--delete" (click)="removeEmployee()">
+                <i class="fa fa-trash"></i>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="employee-action employee-action--edit" (click)="editEmployee()">
+                <i class="fa fa-pencil"></i>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="employee-action employee-action--view" (click)="viewEmployee()">
+                <i class="fa fa-eye"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 mb-3">
+      <div class="card shadow radius20 user-info">
+        <div class="mt-4">
+<!--          <div class="avatar-img"></div>-->
+                    <div class="avatar-placeholder"><i class="fa fa-user-circle"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="user-info__text"><p><span class="title">Name</span>Jane Smith</p></div>
+          <div class="user-info__text"><p><span class="title">Age</span>26</p></div>
+          <div class="user-info__text"><p><span class="title">Gender</span>Female</p></div>
+          <div class="user-info__text"><p><span class="title">Role</span>Accountant</p></div>
+          <div class="user-info__text mb-4"><p><span class="title">Department</span>Marketing</p></div>
+          <div class="user-info__actions row">
+            <div class="col-4">
+              <div class="employee-action employee-action--delete" (click)="removeEmployee()">
+                <i class="fa fa-trash"></i>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="employee-action employee-action--edit" (click)="editEmployee()">
+                <i class="fa fa-pencil"></i>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="employee-action employee-action--view" (click)="viewEmployee()">
+                <i class="fa fa-eye"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>

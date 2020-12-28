@@ -3,10 +3,10 @@ import {SharedModule} from '../shared.module';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {ExpensesModule} from './expenses/expenses.module';
 import {SettingsModule} from './settings/settings.module';
-import {WorkersComponent} from './workers/workers.component';
 import {DepartmentsComponent} from './departments/departments.component';
 import {ApplicantsComponent} from './applicants/applicants.component';
 import {SubscriptionComponent} from './subscription/subscription.component';
+import {EmployeesModule} from './employees/employees.module';
 
 
 @NgModule({
@@ -14,10 +14,10 @@ import {SubscriptionComponent} from './subscription/subscription.component';
     SharedModule,
     DashboardModule,
     ExpensesModule,
-    SettingsModule
+    SettingsModule,
+    EmployeesModule
   ],
   declarations: [
-    WorkersComponent,
     DepartmentsComponent,
     ApplicantsComponent,
     SubscriptionComponent

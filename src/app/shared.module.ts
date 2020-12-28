@@ -12,8 +12,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {PaginationModule} from './common/pagination/pagination.module';
-import {MatCardModule} from '@angular/material/card';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,8 +29,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatDialogModule,
     MatTooltipModule,
-    // MatCardModule,
-    // MatProgressSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -54,9 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastrModule,
     MatDialogModule,
     MatTooltipModule,
-    PaginationModule,
-    // MatCardModule,
-    // MatProgressSpinnerModule
+    PaginationModule
   ]
 })
 export class SharedModule { }
