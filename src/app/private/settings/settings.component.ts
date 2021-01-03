@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {SettingsService} from "./settings.service";
-import {FormBuilder, Validators} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
-import {TranslateService} from "@ngx-translate/core";
-import {MatDialog} from "@angular/material/dialog";
-import {ChangeSettingsComponent} from "./modals/change-settings/change-settings.component";
+import {SettingsService} from './settings.service';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
+import {MatDialog} from '@angular/material/dialog';
+import {ChangeSettingsComponent} from './modals/change-settings/change-settings.component';
 
 @Component({
   selector: 'app-settings',
@@ -44,18 +44,18 @@ export class SettingsComponent implements OnInit {
     this.userSettingsService.getUserSettings().subscribe(
       res => {
         this.user = res.data;
-        if(res.data.logoUrl){
+        if (res.data.logoUrl){
           fetch(res.data.logoUrl)
-            .then(res => res.blob() )
+            .then(data => data.blob() )
             .then(blob => {
               const file = new File([blob], 'logo', blob);
               this.files = [file];
-            })
+            });
         }
-        this.settingsForm.patchValue(res.data)
+        this.settingsForm.patchValue(res.data);
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }
@@ -71,13 +71,13 @@ export class SettingsComponent implements OnInit {
   onSelect(event) {
     this.files = [event.addedFiles[0]];
     const formData = new FormData();
-    formData.append("logo", this.files[0]);
+    formData.append('logo', this.files[0]);
     this.userSettingsService.postUploadLogo(formData).subscribe(
       res => {
         this.settingsForm.get('logoUrl').setValue(res.logoUrl);
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }

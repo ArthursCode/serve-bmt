@@ -8,6 +8,7 @@ import { RemoveEmployeeComponent } from './modals/remove-employee/remove-employe
 import { EditEmployeeComponent } from './modals/edit-employee/edit-employee.component';
 import { AddEmployeeComponent } from './modals/add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './modals/view-employee/view-employee.component';
+import {ImageCropperModule} from 'ngx-img-cropper';
 
 
 
@@ -24,7 +25,8 @@ import { ViewEmployeeComponent } from './modals/view-employee/view-employee.comp
     SharedModule,
     AppRoutingModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ImageCropperModule
   ]
 })
 export class EmployeesModule { }

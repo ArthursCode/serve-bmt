@@ -43,6 +43,16 @@
   </div>
   <div class="row">
 
+    <div>
+      <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper
+      ><br />
+      <img
+        [src]="data.image"
+        [width]="cropperSettings.croppedWidth"
+        [height]="cropperSettings.croppedHeight"
+      />
+    </div>
+
     <div class="col-lg-3 mb-3">
       <div class="card shadow radius20 user-info">
         <div class="mt-4">
