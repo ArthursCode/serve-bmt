@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {EditEmployeeComponent} from './modals/edit-employee/edit-employee.component';
 import {RemoveEmployeeComponent} from './modals/remove-employee/remove-employee.component';
 import {ViewEmployeeComponent} from './modals/view-employee/view-employee.component';
-import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
 
 @Component({
   selector: 'app-employees',
@@ -23,11 +22,6 @@ import { ImageCropperComponent, CropperSettings } from 'ngx-img-cropper';
   ],
 })
 export class EmployeesComponent implements OnInit {
-
-  data: any;
-  cropperSettings: CropperSettings;
-
-
   mathOps = [
     {key: '>='},
     {key: '='},
@@ -48,18 +42,7 @@ export class EmployeesComponent implements OnInit {
     }
   };
 
-  constructor(public dialog: MatDialog) {
-    this.cropperSettings = new CropperSettings();
-    this.cropperSettings.width = 100;
-    this.cropperSettings.height = 100;
-    this.cropperSettings.croppedWidth = 100;
-    this.cropperSettings.croppedHeight = 100;
-    this.cropperSettings.canvasWidth = 400;
-    this.cropperSettings.canvasHeight = 300;
-    this.cropperSettings.rounded = true;
-
-    this.data = {};
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
   }
@@ -84,7 +67,7 @@ export class EmployeesComponent implements OnInit {
     this.getEmployeeList(this.empListParams);
   }
   addEmployee() {
-    const dialogRef = this.dialog.open(AddEmployeeComponent);
+    const dialogRef = this.dialog.open(AddEmployeeComponent, {autoFocus: false, width: '515px'});
     dialogRef.componentInstance.onSave.subscribe(() => {
       console.log('add employee');
       dialogRef.close();

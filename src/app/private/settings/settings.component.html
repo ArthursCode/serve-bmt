@@ -4,15 +4,15 @@
       <div class="e-profile">
         <div class="row">
           <div class="col-12 mb-3">
-            <ngx-dropzone class="custom-dropzone" [multiple]="false" [accept]="'image/*'" (change)="onSelect($event)">
+            <ngx-dropzone #hello class="dropzone-photo" [multiple]="false" [maxFileSize]="1.5*1000*1000" [accept]="'.png, .jpg, .jpeg'" (change)="onSelect($event)">
               <ngx-dropzone-label>
-                <div class="custom-dropzone__placeholder">
+                <div class="dropzone-photo__placeholder">
                   Add company logo
                 </div>
               </ngx-dropzone-label>
               <ngx-dropzone-image-preview
                 ngProjectAs="ngx-dropzone-preview"
-                class="custom-dropzone__img"
+                class="dropzone-photo__img"
                 *ngFor="let f of files"
                 [file]="f"
                 [removable]="true"

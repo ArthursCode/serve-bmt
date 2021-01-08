@@ -374,3 +374,52 @@
     padding: 0 0 10px 0;
   }
 }
+
+.dropzone-photo{
+  width: 180px;
+  display: inline-flex;
+  margin: 0 auto;
+  border-radius: 50% !important;
+  ngx-dropzone-image-preview > img {
+    border-radius: 50% !important;
+    object-fit: cover;
+    width: 140px;
+    height: 140px;
+  }
+
+  &__img{
+    margin: 10px auto !important;
+    outline: none;
+  }
+  &__placeholder{
+    padding: 15px;
+    opacity: 0.8;
+    transition: .1s;
+    &:hover{
+      opacity: 1;
+    }
+  }
+}
+.dropzone-file{
+  height: 150px !important;
+  &__placeholder{
+    padding: 15px;
+    opacity: 0.8;
+    transition: .1s;
+    &:hover{
+      opacity: 1;
+    }
+  }
+  &__file{
+    height: 90px !important;
+    max-width: 140px !important;
+    min-height: 100px !important;
+    font-size: 12px;
+    min-width: 140px !important;
+  }
+}
+
+.select-label{
+  color: rgba(0,0,0,.6);
+  font-size: 12px;
+}

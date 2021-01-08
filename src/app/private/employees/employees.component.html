@@ -43,16 +43,6 @@
   </div>
   <div class="row">
 
-    <div>
-      <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper
-      ><br />
-      <img
-        [src]="data.image"
-        [width]="cropperSettings.croppedWidth"
-        [height]="cropperSettings.croppedHeight"
-      />
-    </div>
-
     <div class="col-lg-3 mb-3">
       <div class="card shadow radius20 user-info">
         <div class="mt-4">
@@ -60,11 +50,7 @@
 <!--          <div class="avatar-placeholder"><i class="fa fa-user-circle"></i></div>-->
         </div>
         <div class="card-body">
-          <div class="user-info__text"><p><span class="title">Name</span>Jane Smith</p></div>
-          <div class="user-info__text"><p><span class="title">Age</span>26</p></div>
-          <div class="user-info__text"><p><span class="title">Gender</span>Female</p></div>
-          <div class="user-info__text"><p><span class="title">Role</span>Accountant</p></div>
-          <div class="user-info__text mb-4"><p><span class="title">Department</span>Marketing</p></div>
+          <div class="user-info__text">Jane Smith</div>
           <div class="user-info__actions row">
             <div class="col-4">
               <div class="employee-action employee-action--delete" (click)="removeEmployee()">
@@ -94,11 +80,7 @@
                     <div class="avatar-placeholder"><i class="fa fa-user-circle"></i></div>
         </div>
         <div class="card-body">
-          <div class="user-info__text"><p><span class="title">Name</span>Jane Smith</p></div>
-          <div class="user-info__text"><p><span class="title">Age</span>26</p></div>
-          <div class="user-info__text"><p><span class="title">Gender</span>Female</p></div>
-          <div class="user-info__text"><p><span class="title">Role</span>Accountant</p></div>
-          <div class="user-info__text mb-4"><p><span class="title">Department</span>Marketing</p></div>
+          <div class="user-info__text">Jane Smith</div>
           <div class="user-info__actions row">
             <div class="col-4">
               <div class="employee-action employee-action--delete" (click)="removeEmployee()">
