@@ -46,13 +46,19 @@
       <div class="col-lg-6">
         <mat-form-field appearance="fill" class="add-employee-input w-100">
           <mat-label>Full Name</mat-label>
-          <input formControlName="full_name" matInput type="text">
+          <input #fullName formControlName="full_name" matInput type="text" required>
+          <mat-error *ngIf="!addEmployeeForm.get('full_name').valid">
+            Full name is required
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="col-lg-6">
         <mat-form-field appearance="fill" class="add-employee-datepicker">
           <mat-label>Birth Date</mat-label>
-          <input formControlName="birth_date" [max]="maxDate" matInput [matDatepicker]="birthPicker" readonly>
+          <input formControlName="birth_date" #birthDate [max]="maxDate" matInput [matDatepicker]="birthPicker" readonly required>
+          <mat-error *ngIf="!addEmployeeForm.get('birth_date').valid">
+            Birth date is required
+          </mat-error>
           <mat-datepicker-toggle matSuffix [for]="birthPicker"></mat-datepicker-toggle>
           <mat-datepicker #birthPicker></mat-datepicker>
         </mat-form-field>
@@ -62,13 +68,16 @@
       <div class="col-lg-6">
         <mat-form-field appearance="fill" class="add-employee-input">
           <mat-label>Phone</mat-label>
-          <input formControlName="phone" matInput type="text">
+          <input formControlName="phone" matInput type="number">
         </mat-form-field>
       </div>
       <div class="col-lg-6">
         <mat-form-field appearance="fill" class="add-employee-input">
           <mat-label>Email</mat-label>
           <input formControlName="email" matInput type="text">
+          <mat-error *ngIf="!addEmployeeForm.get('birth_date').valid">
+            Please enter correct email
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -82,7 +91,7 @@
       <div class="col-lg-6">
         <mat-form-field appearance="fill" class="add-employee-input">
           <mat-label>Salary</mat-label>
-          <input formControlName="salary" matInput type="text">
+          <input formControlName="salary" matInput oninput="validity.valid||(value='');" type="number" min="0">
         </mat-form-field>
       </div>
     </div>
@@ -92,10 +101,17 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <ngx-dropzone class="dropzone-file" [accept]="'.png, .jpg, .jpeg, .pdf, .doc, .docx, .txt'" [multiple]="false" [maxFileSize]="1000*1000" [id]="'file'" (change)="onSelectFiles($event)">
+        <ngx-dropzone class="dropzone-file"
+                      [accept]="'.png, .jpg, .jpeg, .pdf, .doc, .docx, .txt'"
+                      [multiple]="false"
+                      [maxFileSize]="1000*1000"
+                      [id]="'file'"
+                      (change)="onSelectFiles($event)">
           <ngx-dropzone-label><div class="dropzone-file__placeholder">Attach Files</div></ngx-dropzone-label>
           <ngx-dropzone-preview class="dropzone-file__file" *ngFor="let f of files" [removable]="true" (removed)="onRemoveFile(f)">
-            <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+            <ngx-dropzone-label>{{ f.file.name }}<br>
+              <a target="_blank" (click)="$event.stopPropagation()" href="{{f.url}}"><i class="fa fa-download"></i></a>
+            </ngx-dropzone-label>
           </ngx-dropzone-preview>
         </ngx-dropzone>
       </div>

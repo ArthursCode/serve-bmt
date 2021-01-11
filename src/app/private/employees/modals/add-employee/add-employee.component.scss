@@ -34,3 +34,12 @@
     }
   }
 }
+.uploaded-files{
+  font-size: 12px;
+  li{
+    text-decoration: underline;
+  }
+  li:not(:last-child){
+    margin-bottom: 5px;
+  }
+}

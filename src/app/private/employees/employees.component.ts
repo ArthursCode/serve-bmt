@@ -7,6 +7,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {EditEmployeeComponent} from './modals/edit-employee/edit-employee.component';
 import {RemoveEmployeeComponent} from './modals/remove-employee/remove-employee.component';
 import {ViewEmployeeComponent} from './modals/view-employee/view-employee.component';
+import {EmployeesService} from './employees.service';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-employees',
@@ -42,7 +45,10 @@ export class EmployeesComponent implements OnInit {
     }
   };
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              private employeesService: EmployeesService,
+              private toastr: ToastrService,
+              private translate: TranslateService) {}
 
   ngOnInit(): void {
   }
@@ -68,8 +74,8 @@ export class EmployeesComponent implements OnInit {
   }
   addEmployee() {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {autoFocus: false, width: '515px'});
-    dialogRef.componentInstance.onSave.subscribe(() => {
-      console.log('add employee');
+    dialogRef.componentInstance.onSave.subscribe((data) => {
+      this.addNewEmployee(data);
       dialogRef.close();
     });
   }
@@ -90,5 +96,27 @@ export class EmployeesComponent implements OnInit {
   }
   viewEmployee() {
     this.dialog.open(ViewEmployeeComponent);
+  }
+
+  addNewEmployee(data) {
+    this.employeesService.addEmployee(data).subscribe(
+      res => {
+
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+        });
+      }
+    );
+  }
+  editEmployeeData(data) {
+
+  }
+  viewEmployeeData(data) {
+
+  }
+  removeEmployeeData(data) {
+
   }
 }

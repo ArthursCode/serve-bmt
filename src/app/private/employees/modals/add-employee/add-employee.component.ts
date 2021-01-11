@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {EmployeesService} from '../../employees.service';
 import {ToastrService} from 'ngx-toastr';
@@ -21,10 +21,13 @@ import {MY_FORMATS} from '../../../expenses/daily-costs/staff/staff.component';
   ],
 })
 export class AddEmployeeComponent implements OnInit {
+  @ViewChild('fullName') fullNameRef: ElementRef;
+  @ViewChild('birthDate') birthDateRef: ElementRef;
   images: File[] = [];
-  files: File[] = [];
+  files = [];
   addEmployeeForm: any;
   maxDate = new Date();
+  saved = false;
 
   genders = [
     {key: 'male', label: 'Male'},
@@ -32,6 +35,7 @@ export class AddEmployeeComponent implements OnInit {
     {key: 'other', label: 'Other'}
   ];
   roles = [
+    {key: 'employee', label: 'No Role'},
     {key: 'accountant', label: 'Accountant'},
     {key: 'hr', label: 'HR Role'},
     {key: 'chief', label: 'Chief'}
@@ -59,23 +63,32 @@ export class AddEmployeeComponent implements OnInit {
       birth_date: ['', [Validators.required, Validators.minLength(3)]],
       gender: [this.genders[0]],
       phone: [''],
-      email: [''],
-      position: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.email, Validators.minLength(6)]],
+      position: [''],
       salary: [''],
       role: [this.roles[0]],
       fileUrls: [[]]
     });
   }
   saveEmployee() {
-    console.log(this.addEmployeeForm.value);
-    // this.onSave.emit();
+    this.setFieldsFocused();
+    if (!this.addEmployeeForm.valid){
+      return;
+    }
+    this.onSave.emit(this.addEmployeeForm.value);
+  }
+
+  setFieldsFocused(){
+    this.fullNameRef.nativeElement.focus();
+    this.fullNameRef.nativeElement.blur();
+    this.birthDateRef.nativeElement.focus();
+    this.birthDateRef.nativeElement.blur();
   }
 
   onSelectImage(event) {
     this.images = [event.addedFiles[0]];
     const formData = new FormData();
     formData.append('avatar', this.images[0]);
-    console.log(formData);
     this.employeesService.postUploadAvatar(formData).subscribe(
       res => {
         this.addEmployeeForm.get('avatarUrl').setValue(res.avatarUrl);
@@ -92,13 +105,12 @@ export class AddEmployeeComponent implements OnInit {
     if (this.files.length >= 3){
       return;
     }
-    this.files.push(...event.addedFiles);
     const formData = new FormData();
     formData.append('file', event.addedFiles[0]);
     this.employeesService.postUploadFile(formData).subscribe(
       res => {
-        console.log(res);
-        // this.addEmployeeForm.get('fileUrls').setValue(res.logoUrl);
+        this.files.push({file: event.addedFiles[0], url: res.fileUrl});
+        this.addEmployeeForm.get('fileUrls').setValue(this.files.map(el => (el.url)));
       },
       err => {
         this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
@@ -114,6 +126,6 @@ export class AddEmployeeComponent implements OnInit {
   }
   onRemoveFile(event) {
     this.files.splice(this.files.indexOf(event), 1);
+    this.addEmployeeForm.get('fileUrls').setValue(this.files.map(el => (el.url)));
   }
-
 }
