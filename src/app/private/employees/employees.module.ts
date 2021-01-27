@@ -9,6 +9,7 @@ import { EditEmployeeComponent } from './modals/edit-employee/edit-employee.comp
 import { AddEmployeeComponent } from './modals/add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './modals/view-employee/view-employee.component';
 import {NgxDropzoneModule} from 'ngx-dropzone';
+import { AuthEmployeeComponent } from './modals/auth-employee/auth-employee.component';
 
 
 
@@ -18,7 +19,8 @@ import {NgxDropzoneModule} from 'ngx-dropzone';
     RemoveEmployeeComponent,
     EditEmployeeComponent,
     AddEmployeeComponent,
-    ViewEmployeeComponent
+    ViewEmployeeComponent,
+    AuthEmployeeComponent
   ],
   entryComponents: [],
   imports: [

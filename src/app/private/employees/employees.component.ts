@@ -10,6 +10,9 @@ import {ViewEmployeeComponent} from './modals/view-employee/view-employee.compon
 import {EmployeesService} from './employees.service';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthEmployeeComponent} from './modals/auth-employee/auth-employee.component';
+import * as _moment from 'moment';
+import {dateFormat} from '../../common/constants/constants';
 
 @Component({
   selector: 'app-employees',
@@ -25,6 +28,9 @@ import {TranslateService} from '@ngx-translate/core';
   ],
 })
 export class EmployeesComponent implements OnInit {
+  employeeList: any;
+  length = 0;
+  total = 0;
   mathOps = [
     {key: '>='},
     {key: '='},
@@ -33,12 +39,10 @@ export class EmployeesComponent implements OnInit {
 
   empListParams = {
     current: 1,
-    per_page: 9,
+    per_page: 8,
     filters: {
       salary: '',
-      math_op_salary: '=',
-      age: '',
-      math_op_age: '=',
+      math_op: '=',
       full_name: '',
       start: '',
       end: ''
@@ -51,18 +55,31 @@ export class EmployeesComponent implements OnInit {
               private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.getEmployeeList(this.empListParams);
   }
 
   getEmployeeList(event) {
     this.empListParams = {...this.empListParams, ...event};
+    this.employeesService.getEmployeesList(this.empListParams).subscribe(
+      res => {
+        if (res){
+          this.length = res.length;
+          this.total = res.total;
+          this.employeeList = res.data;
+        }
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+        });
+      }
+    );
   }
   resetFilters() {
     this.empListParams.filters = {
       full_name: '',
       salary: '',
-      math_op_salary: '=',
-      age: '',
-      math_op_age: '=',
+      math_op: '=',
       start: '',
       end: ''
     };
@@ -72,36 +89,43 @@ export class EmployeesComponent implements OnInit {
     this.empListParams.current = 1;
     this.getEmployeeList(this.empListParams);
   }
+
   addEmployee() {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {autoFocus: false, width: '515px'});
     dialogRef.componentInstance.onSave.subscribe((data) => {
-      this.addNewEmployee(data);
-      dialogRef.close();
+      this.addEmployeeData(data, dialogRef);
     });
   }
 
-  editEmployee() {
-    const dialogRef = this.dialog.open(EditEmployeeComponent);
-    dialogRef.componentInstance.onSave.subscribe(() => {
-      console.log('edit employee');
-      dialogRef.close();
+  editEmployee(id) {
+    const dialogRef = this.dialog.open(EditEmployeeComponent, {autoFocus: false, width: '515px'});
+    dialogRef.componentInstance.onSave.subscribe((data) => {
+      this.editEmployeeData(data, dialogRef);
     });
   }
-  removeEmployee() {
-    const dialogRef = this.dialog.open(RemoveEmployeeComponent);
+  removeEmployee(employee) {
+    const dialogRef = this.dialog.open(RemoveEmployeeComponent, {data: {fullName: employee.fullName}});
     dialogRef.componentInstance.onRemove.subscribe(() => {
-      console.log('remove employee');
-      dialogRef.close();
+      this.removeEmployeeData(employee._id, dialogRef);
     });
   }
-  viewEmployee() {
+  viewEmployee(id) {
     this.dialog.open(ViewEmployeeComponent);
   }
+  editEmployeeData(data, dialogRef) {
 
-  addNewEmployee(data) {
-    this.employeesService.addEmployee(data).subscribe(
-      res => {
+  }
+  viewEmployeeData(data) {
 
+  }
+  removeEmployeeData(id, dialogRef) {
+    this.employeesService.removeEmployee(id).subscribe(
+      (res: any) => {
+        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
+          this.toastr.success(text);
+          this.getEmployeeList(this.empListParams);
+          dialogRef.close();
+        });
       },
       err => {
         this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
@@ -110,13 +134,31 @@ export class EmployeesComponent implements OnInit {
       }
     );
   }
-  editEmployeeData(data) {
-
+  authEmployee(id) {
+    const dialogRef = this.dialog.open(AuthEmployeeComponent);
+    dialogRef.componentInstance.onSave.subscribe((data) => {
+      this.authEmployeeData(data, dialogRef);
+    });
   }
-  viewEmployeeData(data) {
 
+  addEmployeeData(data, dialogRef) {
+    const reqObj = {...data, birth_date: _moment(data.birth_date, 'MM-DD-YYYY').format(dateFormat)};
+    this.employeesService.addEmployee(reqObj).subscribe(
+      (res: any) => {
+        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
+          this.toastr.success(text);
+          this.getEmployeeList(this.empListParams);
+          dialogRef.close();
+        });
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+        });
+      }
+    );
   }
-  removeEmployeeData(data) {
+  authEmployeeData(data, dialogRef){
 
   }
 }

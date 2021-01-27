@@ -59,8 +59,8 @@ export class AddEmployeeComponent implements OnInit {
   initAddEmployeeForm() {
     this.addEmployeeForm = this.fb.group({
       avatarUrl: [''],
-      full_name: ['', [Validators.required, Validators.minLength(3)]],
-      birth_date: ['', [Validators.required, Validators.minLength(3)]],
+      full_name: ['', [Validators.required]],
+      birth_date: ['', [Validators.required, Validators.minLength(1)]],
       gender: [this.genders[0]],
       phone: [''],
       email: ['', [Validators.email, Validators.minLength(6)]],

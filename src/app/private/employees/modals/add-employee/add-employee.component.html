@@ -1,7 +1,7 @@
 <div mat-dialog-title>Add Employee</div>
 <div mat-dialog-content class="add-employee_area">
   <form [formGroup]="addEmployeeForm">
-    <ngx-dropzone class="dropzone-photo" [multiple]="false" [id]="'image'" [maxFileSize]="1.5*1000*1000" [accept]="'.png, .jpg, .jpeg'" (change)="onSelectImage($event)">
+    <ngx-dropzone class="dropzone-photo" [multiple]="false" [id]="'image'" [maxFileSize]="5000*1000" [accept]="'.png, .jpg, .jpeg'" (change)="onSelectImage($event)">
       <ngx-dropzone-label>
         <div class="dropzone-photo__placeholder">
           Add photo
@@ -104,7 +104,7 @@
         <ngx-dropzone class="dropzone-file"
                       [accept]="'.png, .jpg, .jpeg, .pdf, .doc, .docx, .txt'"
                       [multiple]="false"
-                      [maxFileSize]="1000*1000"
+                      [maxFileSize]="2000*1000"
                       [id]="'file'"
                       (change)="onSelectFiles($event)">
           <ngx-dropzone-label><div class="dropzone-file__placeholder">Attach Files</div></ngx-dropzone-label>

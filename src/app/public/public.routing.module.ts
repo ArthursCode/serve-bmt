@@ -4,6 +4,7 @@ import {SignInComponent} from './sign-in/sign-in.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {GuestGuard} from '../common/auth/guest.guard';
 import {ChangePasswordComponent} from './change-password/change-password.component';
+import {SignInEmployeeComponent} from './sign-in-employee/sign-in-employee.component';
 
 export const publicRoutes: Routes = [
   {
@@ -14,6 +15,11 @@ export const publicRoutes: Routes = [
   {
     path: 'sign-in',
     component: SignInComponent,
+    canActivate: [GuestGuard]
+  },
+  {
+    path: 'sign-in-employee',
+    component: SignInEmployeeComponent,
     canActivate: [GuestGuard]
   },
   {

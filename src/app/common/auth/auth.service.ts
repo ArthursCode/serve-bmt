@@ -21,6 +21,10 @@ export class AuthService {
     return this.http.post<any>(`${this.API_URL}/api/v1/user/login`, user);
   }
 
+  loginEmployee(employee) {
+    return this.http.post<any>(`${this.API_URL}/api/v1/user/login-as-employee`, employee);
+  }
+
   resetPassword(user) {
     return this.http.post<any>(`${this.API_URL}/api/v1/user/reset-password`, user);
   }

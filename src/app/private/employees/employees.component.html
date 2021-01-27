@@ -15,7 +15,7 @@
         <ng-select [items]="mathOps"
                    [clearable]="false"
                    [searchable]="false"
-                   [(ngModel)]="empListParams.filters.math_op_salary"
+                   [(ngModel)]="empListParams.filters.math_op"
                    bindLabel="key">
         </ng-select>
       </div>
@@ -41,70 +41,53 @@
       </div>
     </div>
   </div>
-  <div class="row">
-
-    <div class="col-lg-3 mb-3">
-      <div class="card shadow radius20 user-info">
-        <div class="mt-4">
-                    <div class="avatar-img"></div>
-<!--          <div class="avatar-placeholder"><i class="fa fa-user-circle"></i></div>-->
-        </div>
-        <div class="card-body">
-          <div class="user-info__text">Jane Smith</div>
-          <div class="user-info__actions row">
-            <div class="col-4">
-              <div class="employee-action employee-action--delete" (click)="removeEmployee()">
-                <i class="fa fa-trash"></i>
+  <div class="no-data" *ngIf="employeeList?.length===0">
+    <img src="/assets/images/svg/no-data.svg" alt="no data">
+    <p>No data found</p>
+  </div>
+  <div class="" *ngIf="employeeList?.length>0">
+    <div class="row">
+      <div class="col-lg-3 mb-3" *ngFor="let employee of employeeList; let i = index;">
+        <div class="card shadow radius20 user-info">
+          <div class="mt-4">
+            <div *ngIf="employee.employeeLogoUrl">
+              <div class="avatar-img" [ngStyle]="{'background-image': 'url(' + employee.employeeLogoUrl + ')'}"></div>
+            </div>
+            <div class="avatar-placeholder" *ngIf="!employee.employeeLogoUrl"><i class="fa fa-user-circle"></i></div>
+          </div>
+          <div class="card-body">
+            <div class="user-info__text">{{employee.fullName}}</div>
+            <div class="user-info__auth" (click)="authEmployee(employee._id)" matTooltip="Authenticate employee">Authentication</div>
+            <div class="user-info__actions row">
+              <div class="col-4">
+                <div class="employee-action employee-action--delete" (click)="removeEmployee(employee)">
+                  <i class="fa fa-trash"></i>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="employee-action employee-action--edit" (click)="editEmployee(employee._id)">
+                  <i class="fa fa-pencil"></i>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="employee-action employee-action--view" (click)="viewEmployee(employee._id)">
+                  <i class="fa fa-eye"></i>
+                </div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="employee-action employee-action--edit" (click)="editEmployee()">
-                <i class="fa fa-pencil"></i>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="employee-action employee-action--view" (click)="viewEmployee()">
-                <i class="fa fa-eye"></i>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
     </div>
-
-    <div class="col-lg-3 mb-3">
-      <div class="card shadow radius20 user-info">
-        <div class="mt-4">
-<!--          <div class="avatar-img"></div>-->
-                    <div class="avatar-placeholder"><i class="fa fa-user-circle"></i></div>
-        </div>
-        <div class="card-body">
-          <div class="user-info__text">Jane Smith</div>
-          <div class="user-info__actions row">
-            <div class="col-4">
-              <div class="employee-action employee-action--delete" (click)="removeEmployee()">
-                <i class="fa fa-trash"></i>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="employee-action employee-action--edit" (click)="editEmployee()">
-                <i class="fa fa-pencil"></i>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="employee-action employee-action--view" (click)="viewEmployee()">
-                <i class="fa fa-eye"></i>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
+    <div class="employee-pagination">
+      <app-pagination
+        [length]="length"
+        [total]="total"
+        [itemsPerPage]="empListParams.per_page"
+        [currentPage]="empListParams.current"
+        (switchPage)="getEmployeeList($event)"
+      ></app-pagination>
     </div>
-
-
-
   </div>
 
 </div>

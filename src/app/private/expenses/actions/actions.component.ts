@@ -36,7 +36,6 @@ export class ActionsComponent implements OnInit {
   dataSource = [];
   allChecked = false;
   zero = 0;
-  isLoading = true;
 
   mathOps = [
     {key: '>='},

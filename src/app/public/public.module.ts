@@ -5,6 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {SharedModule} from '../shared.module';
 import {AppRoutingModule} from '../app-routing.module';
+import { SignInEmployeeComponent } from './sign-in-employee/sign-in-employee.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {AppRoutingModule} from '../app-routing.module';
     HomeComponent,
     SignInComponent,
     SignUpComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SignInEmployeeComponent
   ]
 })
 export class PublicModule { }
