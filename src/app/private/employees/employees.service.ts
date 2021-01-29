@@ -36,13 +36,16 @@ export class EmployeesService {
   addEmployee(data) {
     return this.http.post<any>(`${this.API_URL}/api/v1/add-employee`, data);
   }
+  editEmployee(data, id) {
+    return this.http.post<any>(`${this.API_URL}/api/v1/edit-employee/${id}`, data);
+  }
   removeEmployee(id) {
     return this.http.delete<any>(`${this.API_URL}/api/v1/remove-employee/${id}`);
   }
-  editEmployee(data) {
-    // return this.http.post<any>(`${this.API_URL}/api/v1/edit-employee`, data);
-  }
   viewEmployee(data) {
+    // return this.http.post<any>(`${this.API_URL}/api/v1/view-employee`, data);
+  }
+  authEmployee(data) {
     // return this.http.post<any>(`${this.API_URL}/api/v1/view-employee`, data);
   }
   postUploadAvatar(data) {

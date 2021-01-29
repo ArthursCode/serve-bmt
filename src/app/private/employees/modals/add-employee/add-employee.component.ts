@@ -27,7 +27,6 @@ export class AddEmployeeComponent implements OnInit {
   files = [];
   addEmployeeForm: any;
   maxDate = new Date();
-  saved = false;
 
   genders = [
     {key: 'male', label: 'Male'},
@@ -110,7 +109,7 @@ export class AddEmployeeComponent implements OnInit {
     this.employeesService.postUploadFile(formData).subscribe(
       res => {
         this.files.push({file: event.addedFiles[0], url: res.fileUrl});
-        this.addEmployeeForm.get('fileUrls').setValue(this.files.map(el => (el.url)));
+        this.addEmployeeForm.get('fileUrls').setValue(this.files.map(el => ({url: el.url, name: el.file.name})));
       },
       err => {
         this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {

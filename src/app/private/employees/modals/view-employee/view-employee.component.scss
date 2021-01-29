@@ -1,0 +1,31 @@
+.avatar-img{
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+.avatar-placeholder{
+  text-align: center;
+  i{
+    font-size: 100px;
+    color: #495f78;
+  }
+}
+
+.view-employee{
+  &__personal{
+    font-size: 14px;
+    padding: 0;
+    list-style-type: none;
+    li{
+      padding-left: 10px;
+    }
+  }
+  &__heading{
+    font-style: italic;
+    padding: 10px 10px 10px 0px;
+  }
+}

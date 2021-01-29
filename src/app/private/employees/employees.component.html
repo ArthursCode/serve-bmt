@@ -50,13 +50,13 @@
       <div class="col-lg-3 mb-3" *ngFor="let employee of employeeList; let i = index;">
         <div class="card shadow radius20 user-info">
           <div class="mt-4">
-            <div *ngIf="employee.employeeLogoUrl">
-              <div class="avatar-img" [ngStyle]="{'background-image': 'url(' + employee.employeeLogoUrl + ')'}"></div>
+            <div *ngIf="employee.avatarUrl">
+              <div class="avatar-img" [ngStyle]="{'background-image': 'url(' + employee.avatarUrl + ')'}"></div>
             </div>
-            <div class="avatar-placeholder" *ngIf="!employee.employeeLogoUrl"><i class="fa fa-user-circle"></i></div>
+            <div class="avatar-placeholder" *ngIf="!employee.avatarUrl"><i class="fa fa-user-circle"></i></div>
           </div>
           <div class="card-body">
-            <div class="user-info__text">{{employee.fullName}}</div>
+            <div class="user-info__text">{{employee.full_name}}</div>
             <div class="user-info__auth" (click)="authEmployee(employee._id)" matTooltip="Authenticate employee">Authentication</div>
             <div class="user-info__actions row">
               <div class="col-4">
@@ -65,12 +65,12 @@
                 </div>
               </div>
               <div class="col-4">
-                <div class="employee-action employee-action--edit" (click)="editEmployee(employee._id)">
+                <div class="employee-action employee-action--edit" (click)="editEmployee(employee)">
                   <i class="fa fa-pencil"></i>
                 </div>
               </div>
               <div class="col-4">
-                <div class="employee-action employee-action--view" (click)="viewEmployee(employee._id)">
+                <div class="employee-action employee-action--view" (click)="viewEmployee(employee)">
                   <i class="fa fa-eye"></i>
                 </div>
               </div>

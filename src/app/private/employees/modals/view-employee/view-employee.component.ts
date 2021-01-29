@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import * as _moment from 'moment';
+import {tableDateFormat} from '../../../../common/constants/constants';
 
 @Component({
   selector: 'app-view-employee',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewEmployeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getDate(dateOfBirth) {
+    return _moment(dateOfBirth, 'MM-DD-YYYY').format(tableDateFormat);
   }
 
 }

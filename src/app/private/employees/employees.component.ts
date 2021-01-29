@@ -97,10 +97,10 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  editEmployee(id) {
-    const dialogRef = this.dialog.open(EditEmployeeComponent, {autoFocus: false, width: '515px'});
+  editEmployee(employee) {
+    const dialogRef = this.dialog.open(EditEmployeeComponent, {autoFocus: false, width: '515px', data: employee});
     dialogRef.componentInstance.onSave.subscribe((data) => {
-      this.editEmployeeData(data, dialogRef);
+      this.editEmployeeData(data, employee._id, dialogRef);
     });
   }
   removeEmployee(employee) {
@@ -109,30 +109,8 @@ export class EmployeesComponent implements OnInit {
       this.removeEmployeeData(employee._id, dialogRef);
     });
   }
-  viewEmployee(id) {
-    this.dialog.open(ViewEmployeeComponent);
-  }
-  editEmployeeData(data, dialogRef) {
-
-  }
-  viewEmployeeData(data) {
-
-  }
-  removeEmployeeData(id, dialogRef) {
-    this.employeesService.removeEmployee(id).subscribe(
-      (res: any) => {
-        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
-          this.toastr.success(text);
-          this.getEmployeeList(this.empListParams);
-          dialogRef.close();
-        });
-      },
-      err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
-          this.toastr.error(text);
-        });
-      }
-    );
+  viewEmployee(employee) {
+    this.dialog.open(ViewEmployeeComponent, {autoFocus: false, width: '400px', data: employee});
   }
   authEmployee(id) {
     const dialogRef = this.dialog.open(AuthEmployeeComponent);
@@ -140,6 +118,7 @@ export class EmployeesComponent implements OnInit {
       this.authEmployeeData(data, dialogRef);
     });
   }
+
 
   addEmployeeData(data, dialogRef) {
     const reqObj = {...data, birth_date: _moment(data.birth_date, 'MM-DD-YYYY').format(dateFormat)};
@@ -157,6 +136,42 @@ export class EmployeesComponent implements OnInit {
         });
       }
     );
+  }
+  editEmployeeData(data, id, dialogRef) {
+    const reqObj = {...data, birth_date: _moment(data.birth_date, 'MM-DD-YYYY').format(dateFormat)};
+    this.employeesService.editEmployee(reqObj, id).subscribe(
+      (res: any) => {
+        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
+          this.toastr.success(text);
+          this.getEmployeeList(this.empListParams);
+          dialogRef.close();
+        });
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+        });
+      }
+    );
+  }
+  removeEmployeeData(id, dialogRef) {
+    this.employeesService.removeEmployee(id).subscribe(
+      (res: any) => {
+        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
+          this.toastr.success(text);
+          this.getEmployeeList(this.empListParams);
+          dialogRef.close();
+        });
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+        });
+      }
+    );
+  }
+  viewEmployeeData(data) {
+
   }
   authEmployeeData(data, dialogRef){
 

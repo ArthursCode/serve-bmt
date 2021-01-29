@@ -365,7 +365,7 @@
 }
 
 .canvas-height{
-  height: 450px;
+  height: 350px;
 }
 
 .mat-dialog-container{
@@ -382,6 +382,7 @@
   border-radius: 50% !important;
   ngx-dropzone-image-preview > img {
     border-radius: 50% !important;
+    opacity: 1 !important;
     object-fit: cover;
     width: 140px;
     height: 140px;
@@ -416,6 +417,7 @@
     min-height: 100px !important;
     font-size: 12px;
     min-width: 140px !important;
+
   }
 }
 

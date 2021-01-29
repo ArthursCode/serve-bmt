@@ -1,6 +1,123 @@
 <div mat-dialog-title>Edit Employee data</div>
-<div mat-dialog-content>
-  <p>Hello</p>
+<div mat-dialog-content class="edit-employee_area">
+
+  <form [formGroup]="editEmployeeForm">
+    <ngx-dropzone class="dropzone-photo" [multiple]="false" [id]="'image'" [maxFileSize]="5000*1000" [accept]="'.png, .jpg, .jpeg'" (change)="onSelectImage($event)">
+      <ngx-dropzone-label>
+        <div class="dropzone-photo__placeholder">
+          Add photo
+        </div>
+      </ngx-dropzone-label>
+      <ngx-dropzone-image-preview id="editEmployeeImg"
+        ngProjectAs="ngx-dropzone-preview"
+        class="dropzone-photo__img"
+        *ngFor="let f of images"
+        [file]="f"
+        [removable]="true"
+        (removed)="onRemoveImage(f)">
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+
+    <div class="row my-4">
+      <div class="col-12">Personal information</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 mb-3">
+        <div class="select-label mb-1">Gender</div>
+        <ng-select [items]="genders"
+                   [clearable]="false"
+                   [searchable]="false"
+                   formControlName="gender"
+                   bindLabel="label">
+        </ng-select>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="select-label mb-1">Role</div>
+        <ng-select [items]="roles"
+                   [clearable]="false"
+                   [searchable]="false"
+                   formControlName="role"
+                   bindLabel="label">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-form-field appearance="fill" class="edit-employee-input w-100">
+          <mat-label>Full Name</mat-label>
+          <input #fullName formControlName="full_name" matInput type="text" required>
+          <mat-error *ngIf="!editEmployeeForm.get('full_name').valid">
+            Full name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="fill" class="edit-employee-datepicker">
+          <mat-label>Birth Date</mat-label>
+          <input formControlName="birth_date" #birthDate [max]="maxDate" matInput [matDatepicker]="birthPicker" readonly required>
+          <mat-error *ngIf="!editEmployeeForm.get('birth_date').valid">
+            Birth date is required
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="birthPicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-form-field appearance="fill" class="edit-employee-input">
+          <mat-label>Phone</mat-label>
+          <input formControlName="phone" matInput type="number">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="fill" class="edit-employee-input">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput type="text">
+          <mat-error *ngIf="!editEmployeeForm.get('birth_date').valid">
+            Please enter correct email
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-form-field appearance="fill" class="edit-employee-input">
+          <mat-label>Position</mat-label>
+          <input formControlName="position" matInput type="text">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="fill" class="edit-employee-input">
+          <mat-label>Salary</mat-label>
+          <input formControlName="salary" matInput oninput="validity.valid||(value='');" type="number" min="0">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-12">Attached files (maximum 3 files)</div>
+    </div>
+    <div class="row mb-4">
+      <div class="col">
+        <ngx-dropzone class="dropzone-file"
+                      [accept]="'.png, .jpg, .jpeg, .pdf, .doc, .docx, .txt'"
+                      [multiple]="false"
+                      [maxFileSize]="2000*1000"
+                      [id]="'file'"
+                      (change)="onSelectFiles($event)">
+          <ngx-dropzone-label><div class="dropzone-file__placeholder">Attach Files</div></ngx-dropzone-label>
+          <ngx-dropzone-preview class="dropzone-file__file" *ngFor="let f of files" [removable]="true" (removed)="onRemoveFile(f)">
+            <ngx-dropzone-label>{{ f.file.name }}<br>
+              <a target="_blank" (click)="$event.stopPropagation()" href="{{f.url}}" matTooltip="Preview or download"><i class="fa fa-download"></i></a>
+            </ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+      </div>
+    </div>
+  </form>
 </div>
 <div mat-dialog-actions class="row d-flex justify-content-end">
   <button mat-dialog-close class="bmt-btn bmt-btn--red mr-2">Cancel</button>

@@ -1,0 +1,45 @@
+::ng-deep{
+  .edit-employee_area{
+    .edit-employee-datepicker{
+      width: 100%;
+      font-size: 12px;
+      .mat-form-field-suffix .mat-icon-button{
+        width: 2em;
+        height: 2em;
+      }
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+    .edit-employee-input{
+      width: 100%;
+      font-size: 12px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+  }
+}
+.uploaded-files{
+  font-size: 12px;
+  li{
+    text-decoration: underline;
+  }
+  li:not(:last-child){
+    margin-bottom: 5px;
+  }
+}

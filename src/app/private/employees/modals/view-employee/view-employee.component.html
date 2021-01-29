@@ -1,6 +1,29 @@
 <div mat-dialog-title>Employee data</div>
-<div mat-dialog-content>
-  <p>Hello</p>
+<div mat-dialog-content class="view-employee">
+  <div>
+    <div *ngIf="data.avatarUrl">
+      <div class="avatar-img" [ngStyle]="{'background-image': 'url(' + data.avatarUrl + ')'}"></div>
+    </div>
+    <div class="avatar-placeholder" *ngIf="!data.avatarUrl"><i class="fa fa-user-circle"></i></div>
+  </div>
+  <hr class="mb-0">
+  <div>
+    <div class="view-employee__heading">Personal information</div>
+    <ul class="view-employee__personal">
+      <li *ngIf="data.full_name"><b>Full name: </b>{{data.full_name}}</li>
+      <li *ngIf="data.birth_date"><b>Date of birth: </b>{{getDate(data.birth_date)}}</li>
+      <li *ngIf="data.gender.label"><b>Gender: </b>{{data.gender.label}}</li>
+      <li *ngIf="data.email"><b>Email: </b><a href="mailto:{{data.email}}">{{data.email}}</a></li>
+      <li *ngIf="data.phone"><b>Phone number: </b><a href="tel:{{data.phone}}">+{{data.phone}}</a></li>
+      <li *ngIf="data.position"><b>Position: </b>{{data.position}}</li>
+      <li *ngIf="data.role.label"><b>Role: </b>{{data.role.label}}</li>
+      <div *ngIf="data.fileUrls.length>0" class="view-employee__heading">Attached files</div>
+      <li *ngFor="let file of data.fileUrls">
+        <a href="{{file.url}}" target="_blank" matTooltip="Preview or download">{{file.name}} <i class="fa fa-download"></i></a>
+      </li>
+    </ul>
+
+  </div>
 </div>
 <div mat-dialog-actions class="row d-flex justify-content-end">
   <button mat-dialog-close class="bmt-btn bmt-btn--red mr-2">Close</button>

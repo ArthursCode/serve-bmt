@@ -5,6 +5,8 @@ import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ChangeSettingsComponent} from './modals/change-settings/change-settings.component';
+import {createEmptyFile} from '../../common/functions/file-operations';
+import {drawImage} from '../../common/functions/image-operations';
 
 @Component({
   selector: 'app-settings',
@@ -45,12 +47,8 @@ export class SettingsComponent implements OnInit {
       res => {
         this.user = res.data;
         if (res.data.logoUrl){
-          fetch(res.data.logoUrl)
-            .then(data => data.blob() )
-            .then(blob => {
-              const file = new File([blob], 'logo', blob);
-              this.files = [file];
-            });
+          this.files = [createEmptyFile('logo')];
+          drawImage('settingsImg', res.data.logoUrl);
         }
         this.settingsForm.patchValue(res.data);
       },
@@ -69,6 +67,9 @@ export class SettingsComponent implements OnInit {
   }
 
   onSelect(event) {
+    if (!event.addedFiles[0]) {
+      return;
+    }
     this.files = [event.addedFiles[0]];
     const formData = new FormData();
     formData.append('logo', this.files[0]);
