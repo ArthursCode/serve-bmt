@@ -104,7 +104,7 @@ export class EmployeesComponent implements OnInit {
     });
   }
   removeEmployee(employee) {
-    const dialogRef = this.dialog.open(RemoveEmployeeComponent, {data: {fullName: employee.fullName}});
+    const dialogRef = this.dialog.open(RemoveEmployeeComponent, {data: {full_name: employee.full_name}});
     dialogRef.componentInstance.onRemove.subscribe(() => {
       this.removeEmployeeData(employee._id, dialogRef);
     });

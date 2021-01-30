@@ -16,10 +16,11 @@
 }
 
 .view-employee{
-  &__personal{
+  &__info{
     font-size: 14px;
     padding: 0;
     list-style-type: none;
+    margin-bottom: 0;
     li{
       padding-left: 10px;
     }
