@@ -1,1 +1,53 @@
-
+table {
+  width: 100%;
+}
+::ng-deep{
+  .actions{
+    border-radius: 20px;
+    box-shadow: 0 0 20px 0 #c8d5f561;
+    &__actions{
+      width: 50px;
+    }
+    &__checkbox{
+      width: 75px;
+    }
+    &__row{
+      td{
+        font-size: 12px;
+        color: #344d69;
+      }
+    }
+    .mat-checkbox-layout{
+      margin-bottom: 0;
+    }
+  }
+  .filters_area{
+    .filter-datepicker{
+      margin-right: 5px;
+      font-size: 12px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+    .filter-input{
+      font-size: 12px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+  }
+}

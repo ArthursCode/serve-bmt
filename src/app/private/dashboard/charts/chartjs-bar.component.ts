@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from "../dashboard.service";
-import {ToastrService} from "ngx-toastr";
-import {TranslateService} from "@ngx-translate/core";
+import {DashboardService} from '../dashboard.service';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'ngx-chart-bar',
+  selector: 'app-chart-bar',
   template: `
-    <div class="chart-heading">Costs chart</div>
+    <div class="chart-heading">Expenses chart</div>
     <ng-select class="period-select mb-4"
                [items]="periodsBar"
                [clearable]="false"
@@ -112,16 +112,16 @@ export class ChartBarComponent implements OnInit {
   getChartBar() {
     this.dashboardService.getChartBar(this.searchParams).subscribe(
       res => {
-        if(res.data){
+        if (res.data){
           this.data.labels = res.labels;
-          for(let i=0; i< this.data.datasets.length;i++) {
+          for (let i = 0; i < this.data.datasets.length; i++) {
             this.data.datasets[i].data = res.data[i];
           }
           this.data = Object.create(this.data);
         }
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }

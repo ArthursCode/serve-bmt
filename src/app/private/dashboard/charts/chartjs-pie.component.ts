@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastrService} from "ngx-toastr";
-import {DashboardService} from "../dashboard.service";
-import {TranslateService} from "@ngx-translate/core";
+import {ToastrService} from 'ngx-toastr';
+import {DashboardService} from '../dashboard.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'ngx-chart-pie',
+  selector: 'app-chart-pie',
   template: `
-    <div class="chart-heading">Costs summary</div>
+    <div class="chart-heading">Expenses summary</div>
     <ng-select class="period-select mb-4"
                [items]="periodsPie"
                [clearable]="false"
@@ -84,7 +84,7 @@ export class ChartPieComponent implements OnInit {
         }
       },
       err => {
-        this.translate.get(err.error.message || 'ERROR').subscribe((text:string) => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
           this.toastr.error(text);
         });
       }

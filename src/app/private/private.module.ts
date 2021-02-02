@@ -7,6 +7,8 @@ import {DepartmentsComponent} from './departments/departments.component';
 import {ApplicantsComponent} from './applicants/applicants.component';
 import {SubscriptionComponent} from './subscription/subscription.component';
 import {EmployeesModule} from './employees/employees.module';
+import {DepartmentsModule} from './departments/departments.module';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {EmployeesModule} from './employees/employees.module';
     DashboardModule,
     ExpensesModule,
     SettingsModule,
-    EmployeesModule
+    EmployeesModule,
+    DepartmentsModule,
+    MatTableModule
   ],
   declarations: [
     DepartmentsComponent,
