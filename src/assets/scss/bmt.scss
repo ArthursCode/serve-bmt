@@ -420,7 +420,14 @@
     min-height: 100px !important;
     font-size: 12px;
     min-width: 140px !important;
-
+    &__name{
+      max-width: 120px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

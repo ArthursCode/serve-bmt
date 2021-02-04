@@ -10,18 +10,19 @@
   <div>
     <div class="view-employee__heading">Personal information</div>
     <ul class="view-employee__info">
-      <li *ngIf="data.full_name"><b>Full name: </b>{{data.full_name}}</li>
-      <li *ngIf="data.birth_date"><b>Date of birth: </b>{{getDate(data.birth_date)}}</li>
-      <li *ngIf="data.gender.label"><b>Gender: </b>{{data.gender.label}}</li>
-      <li *ngIf="data.email"><b>Email: </b><a href="mailto:{{data.email}}">{{data.email}}</a></li>
-      <li *ngIf="data.phone"><b>Phone number: </b><a href="tel:{{data.phone}}">+{{data.phone}}</a></li>
-      <li *ngIf="data.position"><b>Position: </b>{{data.position}}</li>
-      <li *ngIf="data.role.label"><b>Role: </b>{{data.role.label}}</li>
+      <li *ngIf="data.full_name"><b>Full name</b>{{data.full_name}}</li>
+      <li *ngIf="data.birth_date"><b>Date of birth</b>{{getDate(data.birth_date)}}</li>
+      <li *ngIf="data.gender.label"><b>Gender</b>{{data.gender.label}}</li>
+      <li *ngIf="data.email"><b>Email</b><a href="mailto:{{data.email}}">{{data.email}}</a></li>
+      <li *ngIf="data.phone"><b>Phone number</b><a href="tel:{{data.phone}}">+{{data.phone}}</a></li>
+      <li *ngIf="data.position"><b>Position</b>{{data.position}}</li>
+      <li *ngIf="data.role.label"><b>Role</b>{{data.role.label}}</li>
     </ul>
     <div *ngIf="data.fileUrls.length>0" class="view-employee__heading">Attached files</div>
     <ul class="view-employee__info">
       <li *ngFor="let file of data.fileUrls">
-        <a href="{{file.url}}" target="_blank" matTooltip="Preview or download">{{file.name}} <i class="fa fa-download"></i></a>
+        <a href="{{file.url}}" target="_blank" matTooltip="Preview or download">
+          <div class="view-employee__info__file">{{file.name}}</div> <i class="fa fa-download"></i></a>
       </li>
     </ul>
 

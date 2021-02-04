@@ -109,7 +109,8 @@
                       (change)="onSelectFiles($event)">
           <ngx-dropzone-label><div class="dropzone-file__placeholder">Attach Files</div></ngx-dropzone-label>
           <ngx-dropzone-preview class="dropzone-file__file" *ngFor="let f of files" [removable]="true" (removed)="onRemoveFile(f)">
-            <ngx-dropzone-label>{{ f.file.name }}<br>
+            <ngx-dropzone-label>
+              <div class="dropzone-file__file__name">{{ f.file.name }}</div>
               <a target="_blank" (click)="$event.stopPropagation()" href="{{f.url}}"><i class="fa fa-download"></i></a>
             </ngx-dropzone-label>
           </ngx-dropzone-preview>

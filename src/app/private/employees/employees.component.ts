@@ -100,13 +100,13 @@ export class EmployeesComponent implements OnInit {
   editEmployee(employee) {
     const dialogRef = this.dialog.open(EditEmployeeComponent, {autoFocus: false, width: '515px', data: employee});
     dialogRef.componentInstance.onSave.subscribe((data) => {
-      this.editEmployeeData(data, employee._id, dialogRef);
+      this.editEmployeeData(data, employee.id, dialogRef);
     });
   }
   removeEmployee(employee) {
     const dialogRef = this.dialog.open(RemoveEmployeeComponent, {data: {full_name: employee.full_name}});
     dialogRef.componentInstance.onRemove.subscribe(() => {
-      this.removeEmployeeData(employee._id, dialogRef);
+      this.removeEmployeeData(employee.id, dialogRef);
     });
   }
   viewEmployee(employee) {
