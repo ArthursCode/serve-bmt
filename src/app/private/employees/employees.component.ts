@@ -112,8 +112,8 @@ export class EmployeesComponent implements OnInit {
   viewEmployee(employee) {
     this.dialog.open(ViewEmployeeComponent, {autoFocus: false, width: '400px', data: employee});
   }
-  authEmployee(id) {
-    const dialogRef = this.dialog.open(AuthEmployeeComponent);
+  authEmployee(employee) {
+    const dialogRef = this.dialog.open(AuthEmployeeComponent, {data: employee});
     dialogRef.componentInstance.onSave.subscribe((data) => {
       this.authEmployeeData(data, dialogRef);
     });
@@ -169,9 +169,6 @@ export class EmployeesComponent implements OnInit {
         });
       }
     );
-  }
-  viewEmployeeData(data) {
-
   }
   authEmployeeData(data, dialogRef){
 

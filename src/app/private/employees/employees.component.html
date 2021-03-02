@@ -57,7 +57,7 @@
           </div>
           <div class="card-body">
             <div class="user-info__text">{{employee.full_name}}</div>
-            <div class="user-info__auth" (click)="authEmployee(employee._id)" matTooltip="Authenticate employee">Authentication</div>
+            <div class="user-info__auth" (click)="authEmployee(employee)" matTooltip="Authenticate employee">Authentication</div>
             <div class="user-info__actions row">
               <div class="col-4">
                 <div class="employee-action employee-action--delete" (click)="removeEmployee(employee)">

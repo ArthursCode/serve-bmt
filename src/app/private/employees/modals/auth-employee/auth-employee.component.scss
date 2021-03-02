@@ -1,0 +1,18 @@
+::ng-deep{
+  .auth-employee_area{
+    .auth-employee-input{
+      width: 100%;
+      font-size: 12px;
+      .mat-form-field-flex {
+        padding: 0;
+        background: none;
+        .mat-form-field-infix{
+          width: auto;
+        }
+        .mat-icon-button{
+          outline: none;
+        }
+      }
+    }
+  }
+}
