@@ -17,6 +17,10 @@ export class AuthEmployeeComponent implements OnInit {
   onSave = new EventEmitter();
   authEmployeeForm: any;
 
+  spinGenerate = false;
+  spinCopy = false;
+  password = '';
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private fb: FormBuilder,
               private employeesService: EmployeesService,
@@ -32,6 +36,7 @@ export class AuthEmployeeComponent implements OnInit {
     this.employeesService.getEmployeeAuth(id).subscribe(
       res => {
         this.initAuthEmployeeForm(res);
+        this.password = res.password;
       },
       err => {
         this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
@@ -41,25 +46,45 @@ export class AuthEmployeeComponent implements OnInit {
     );
   }
 
-  initAuthEmployeeForm(data) {
+  initAuthEmployeeForm(employee) {
     this.authEmployeeForm = this.fb.group({
-      username: [data ? data.username : '', [Validators.required]],
-      password: [data ? data.password : '', [Validators.required]]
+      username: [employee.username ? employee.username : this.data.full_name, [Validators.required]]
     });
   }
 
   setFieldsFocused(){
     this.usernameRef.nativeElement.focus();
     this.usernameRef.nativeElement.blur();
-    this.passwordRef.nativeElement.focus();
-    this.passwordRef.nativeElement.blur();
   }
   saveAuth() {
     this.setFieldsFocused();
     if (!this.authEmployeeForm.valid){
       return;
     }
-    this.onSave.emit();
+    this.onSave.emit({password: this.password, ...this.authEmployeeForm.value});
+  }
+
+  generatePassword() {
+    this.spinGenerate = true;
+    this.employeesService.generatePasswordEmployee(this.data.id).subscribe(
+      res => {
+        this.spinGenerate = false;
+        this.password = res.password;
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+          this.spinGenerate = false;
+        });
+      }
+    );
+
+  }
+  copyClipBoard() {
+    this.spinCopy = true;
+    setTimeout(() => {
+      this.spinCopy = false;
+    }, 300);
   }
 
 }

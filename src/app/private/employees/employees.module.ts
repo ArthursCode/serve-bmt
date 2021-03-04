@@ -10,6 +10,8 @@ import { AddEmployeeComponent } from './modals/add-employee/add-employee.compone
 import { ViewEmployeeComponent } from './modals/view-employee/view-employee.component';
 import {NgxDropzoneModule} from 'ngx-dropzone';
 import { AuthEmployeeComponent } from './modals/auth-employee/auth-employee.component';
+import {MatIconModule} from '@angular/material/icon';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 
@@ -27,8 +29,10 @@ import { AuthEmployeeComponent } from './modals/auth-employee/auth-employee.comp
     SharedModule,
     AppRoutingModule,
     MatDatepickerModule,
+    MatIconModule,
     MatNativeDateModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    ClipboardModule
   ]
 })
 export class EmployeesModule { }

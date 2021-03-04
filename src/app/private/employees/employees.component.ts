@@ -113,9 +113,9 @@ export class EmployeesComponent implements OnInit {
     this.dialog.open(ViewEmployeeComponent, {autoFocus: false, width: '400px', data: employee});
   }
   authEmployee(employee) {
-    const dialogRef = this.dialog.open(AuthEmployeeComponent, {data: employee});
+    const dialogRef = this.dialog.open(AuthEmployeeComponent, {autoFocus: false, width: '340px', data: employee});
     dialogRef.componentInstance.onSave.subscribe((data) => {
-      this.authEmployeeData(data, dialogRef);
+      this.authEmployeeData(data, employee.id, dialogRef);
     });
   }
 
@@ -170,7 +170,20 @@ export class EmployeesComponent implements OnInit {
       }
     );
   }
-  authEmployeeData(data, dialogRef){
-
+  authEmployeeData(data, id, dialogRef){
+    this.employeesService.setEmployeeAuth(data, id).subscribe(
+      (res: any) => {
+        this.translate.get(res.message || 'SUCCESS').subscribe((text: string) => {
+          this.toastr.success(text);
+          this.getEmployeeList(this.empListParams);
+          dialogRef.close();
+        });
+      },
+      err => {
+        this.translate.get(err.error.message || 'ERROR').subscribe((text: string) => {
+          this.toastr.error(text);
+        });
+      }
+    );
   }
 }

@@ -16,3 +16,37 @@
     }
   }
 }
+
+.gen-password{
+  border-bottom: 1px solid #9c9c9c;
+  &__text{
+    width: 100%;
+    span{
+      font-style: italic;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+  &__actions{
+    display: flex;
+    div {
+      width: 24px;
+      min-width: 24px;
+      height: 30px;
+      text-align: center;
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+      .mat-icon{
+        cursor: pointer;
+        color: #32c671;
+        user-select: none;
+        transition: 0.4s;
+        opacity: 0.8;
+        &:hover{
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

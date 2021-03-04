@@ -42,9 +42,6 @@ export class EmployeesService {
   removeEmployee(id) {
     return this.http.delete<any>(`${this.API_URL}/api/v1/remove-employee/${id}`);
   }
-  authEmployee(data) {
-    // return this.http.post<any>(`${this.API_URL}/api/v1/view-employee`, data);
-  }
   postUploadAvatar(data) {
     return this.http.post<any>(`${this.API_URL}/api/v1/upload-avatar`, data);
   }
@@ -55,7 +52,10 @@ export class EmployeesService {
   getEmployeeAuth(id) {
     return this.http.get<any>(`${this.API_URL}/api/v1/auth-data/${id}`, );
   }
-  setEmployeeAuth(id, data) {
+  setEmployeeAuth(data, id) {
     return this.http.post<any>(`${this.API_URL}/api/v1/set-auth-data/${id}`, data);
+  }
+  generatePasswordEmployee(id) {
+    return this.http.get<any>(`${this.API_URL}/api/v1/generate-password/${id}`, );
   }
 }
